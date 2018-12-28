@@ -1,0 +1,6 @@
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Assets\StreamingAssets\Game.Hotfix.dll
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Assets\StreamingAssets\Game.Hotfix.pdb
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Game.Hotfix\obj\Release\Game.Hotfix.csprojResolveAssemblyReference.cache
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Game.Hotfix\obj\Release\Game.Hotfix.csproj.CoreCompileInputs.cache
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Game.Hotfix\obj\Release\Game.Hotfix.dll
+C:\Users\yubin\how-to-use-in-ilruntime\Hotfix\Game.Hotfix\obj\Release\Game.Hotfix.pdb
