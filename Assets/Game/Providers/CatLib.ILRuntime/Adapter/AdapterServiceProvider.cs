@@ -40,7 +40,7 @@ namespace CatLib.ILRuntime.Adapter
             return new Adaptor(appdomain, instance);
         }
 
-        private class Adaptor : ServiceProvider, CrossBindingAdaptorType
+        private class Adaptor : ServiceProvider, CrossBindingAdaptorType, IServiceProviderType
         {
             private readonly ILTypeInstance instance;
             private readonly ILRuntimeAppDomain appdomain;
@@ -60,6 +60,14 @@ namespace CatLib.ILRuntime.Adapter
             public Adaptor()
             {
                 
+            }
+
+            public Type BaseType
+            {
+                get
+                {
+                    return instance.Type.ReflectionType;
+                }
             }
 
             public Adaptor(ILRuntimeAppDomain appdomain, ILTypeInstance instance)

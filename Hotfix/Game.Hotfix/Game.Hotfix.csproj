@@ -57,7 +57,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
+    <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
+    <Compile Include="Providers\TestsGetBind\GetBind.cs" />
+    <Compile Include="Providers\TestsGetBind\ProviderGetBind.cs" />
     <Compile Include="Providers\TestsHasInstance\HasInstance.cs" />
     <Compile Include="Providers\TestsHasInstance\ProviderHasInstance.cs" />
     <Compile Include="Util.cs" />

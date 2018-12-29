@@ -35,6 +35,7 @@ namespace CatLib.ILRuntime.Redirect
         {
             mapping = new RedirectMapping();
 
+            mapping.Register("GetBind", 1, 0, GetBind_TService);
             mapping.Register("HasInstance", 1, 0, HasInstance_TService);
             mapping.Register("Singleton", 2, 0, Singleton_TService_TConcrete);
             mapping.Register("Singleton", 1, 0, Singleton_TService);
@@ -61,12 +62,27 @@ namespace CatLib.ILRuntime.Redirect
             }
         }
 
+        // public static IBindData GetBind<TService>()
+        public static StackObject* GetBind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            return ILIntepreter.PushObject(esp, mStack, App.GetBind(tService));
+        }
+
         // public static bool HasInstance<TService>()
         public static StackObject* HasInstance_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 1)
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
             {
                 throw new EntryPointNotFoundException();
             }
@@ -81,7 +97,7 @@ namespace CatLib.ILRuntime.Redirect
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 2)
+            if (genericArguments == null || genericArguments.Length != 2 || method.ParameterCount != 0)
             {
                 throw new EntryPointNotFoundException();
             }
@@ -97,7 +113,7 @@ namespace CatLib.ILRuntime.Redirect
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 1)
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
             {
                 throw new EntryPointNotFoundException();
             }
@@ -113,7 +129,7 @@ namespace CatLib.ILRuntime.Redirect
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 1)
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 1)
             {
                 throw new EntryPointNotFoundException();
             }

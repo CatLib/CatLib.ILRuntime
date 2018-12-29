@@ -10,6 +10,7 @@
  */
 
 using CatLib;
+using Game.Hotfix.TestsGetBind;
 using Game.Hotfix.TestsHasInstance;
 
 namespace Game.Hotfix
@@ -25,6 +26,7 @@ namespace Game.Hotfix
         public static IServiceProvider[] ServiceProviders => new IServiceProvider[]
         {
             new ProviderHasInstance(), 
+            new ProviderGetBind(), 
         };
     }
 }
