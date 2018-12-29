@@ -51,5 +51,14 @@ namespace Game.Hotfix
 
             UnityEngine.Debug.Log($"[<color=#00ff00>Success</color>] {name}{context}");
         }
+
+        /// <summary>
+        /// 输出常规内容
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Log(string message)
+        {
+            UnityEngine.Debug.Log(message);
+        }
     }
 }

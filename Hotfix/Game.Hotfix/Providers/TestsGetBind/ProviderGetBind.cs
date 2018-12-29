@@ -20,19 +20,19 @@ namespace Game.Hotfix.TestsGetBind
     {
         public override void Init()
         {
-            Debug.Log("Init() : ProviderGetBind");
+            Util.Log("Init() : ProviderGetBind");
             Util.Success("GetBind");
         }
 
         public override IEnumerator CoroutineInit()
         {
-            Debug.Log("CoroutineInit() : ProviderGetBind");
+            Util.Log("CoroutineInit() : ProviderGetBind");
             return base.CoroutineInit();
         }
 
         public override void Register()
         {
-            Debug.Log("Register() : ProviderGetBind");
+            Util.Log("Register() : ProviderGetBind");
             if (App.GetBind<IGetBind>() != null)
             {
                 Util.Faild("GetBind_1");
@@ -47,11 +47,12 @@ namespace Game.Hotfix.TestsGetBind
                 return;
             }
 
-            if (App.GetBind<IGetBind>() != App.GetBind<IGetBind>())
+            if (App.GetBind<IGetBind>() == App.GetBind<IGetBind>())
             {
-                Util.Faild("GetBind_3");
                 return;
             }
+
+            Util.Faild("GetBind_3");
         }
     }
 }

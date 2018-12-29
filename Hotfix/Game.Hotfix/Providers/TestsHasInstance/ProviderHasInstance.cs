@@ -20,7 +20,7 @@ namespace Game.Hotfix.TestsHasInstance
     {
         public override void Init()
         {
-            Debug.Log("Init() : ProviderHasInstance");
+            Util.Log("Init() : ProviderHasInstance");
 
             var instance = App.Make<IHasInstance>();
 
@@ -40,13 +40,13 @@ namespace Game.Hotfix.TestsHasInstance
 
         public override IEnumerator CoroutineInit()
         {
-            Debug.Log("CoroutineInit() : ProviderHasInstance");
+            Util.Log("CoroutineInit() : ProviderHasInstance");
             return base.CoroutineInit();
         }
 
         public override void Register()
         {
-            Debug.Log("Register() : ProviderHasInstance");
+            Util.Log("Register() : ProviderHasInstance");
             if (App.HasInstance<IHasInstance>())
             {
                 Util.Faild("HasInstance_1");
