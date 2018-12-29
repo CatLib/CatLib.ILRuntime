@@ -9,10 +9,12 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsHasInstance
+using Game.Hotfix.API.TestsHasBind;
+
+namespace Game.Hotfix.TestsHasBind
 {
-    public interface IHasInstance
+    public class HasBind : IHasBind
     {
-        int GetValue();
+
     }
 }

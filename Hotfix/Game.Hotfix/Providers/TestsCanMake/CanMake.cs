@@ -9,10 +9,11 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsHasInstance
+using Game.Hotfix.API.TestsCanMake;
+
+namespace Game.Hotfix.TestsCanMake
 {
-    public interface IHasInstance
+    public class CanMake : ICanMake
     {
-        int GetValue();
     }
 }

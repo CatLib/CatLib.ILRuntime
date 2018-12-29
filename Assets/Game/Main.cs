@@ -9,7 +9,6 @@
  * Document: https://catlib.io/
  */
 
-using System;
 using CatLib;
 using CatLib.ILRuntime;
 using Game.API.Debugger;

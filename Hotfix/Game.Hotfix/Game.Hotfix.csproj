@@ -57,12 +57,27 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
+    <Compile Include="Providers\API\TestsCanMake\ICanMake.cs" />
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
+    <Compile Include="Providers\API\TestsHasBind\IHasBind.cs" />
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
+    <Compile Include="Providers\API\TestsIsAlias\IIsAlias.cs" />
+    <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
+    <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
+    <Compile Include="Providers\TestsCanMake\CanMake.cs" />
+    <Compile Include="Providers\TestsCanMake\ProviderCanMake.cs" />
     <Compile Include="Providers\TestsGetBind\GetBind.cs" />
     <Compile Include="Providers\TestsGetBind\ProviderGetBind.cs" />
+    <Compile Include="Providers\TestsHasBind\HasBind.cs" />
+    <Compile Include="Providers\TestsHasBind\ProviderHasBind.cs" />
     <Compile Include="Providers\TestsHasInstance\HasInstance.cs" />
     <Compile Include="Providers\TestsHasInstance\ProviderHasInstance.cs" />
+    <Compile Include="Providers\TestsIsAlias\IsAlias.cs" />
+    <Compile Include="Providers\TestsIsAlias\ProviderIsAlias.cs" />
+    <Compile Include="Providers\TestsIsResolved\IsResolved.cs" />
+    <Compile Include="Providers\TestsIsResolved\ProviderIsResolved.cs" />
+    <Compile Include="Providers\TestsIsStatic\IsStatic.cs" />
+    <Compile Include="Providers\TestsIsStatic\ProviderIsStatic.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup />

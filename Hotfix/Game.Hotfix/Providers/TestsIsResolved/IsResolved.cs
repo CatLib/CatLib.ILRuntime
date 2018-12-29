@@ -9,10 +9,11 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsHasInstance
+using Game.Hotfix.API.TestsIsResolved;
+
+namespace Game.Hotfix.TestsIsResolved
 {
-    public interface IHasInstance
+    public class IsResolved : IIsResolved
     {
-        int GetValue();
     }
 }

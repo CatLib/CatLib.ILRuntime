@@ -9,4 +9,3 @@ D:\Private\CatLib.ILRuntime\Assets\StreamingAssets\Game.Hotfix.pdb
 D:\Private\CatLib.ILRuntime\Hotfix\Game.Hotfix\obj\Debug\Game.Hotfix.csproj.CoreCompileInputs.cache
 D:\Private\CatLib.ILRuntime\Hotfix\Game.Hotfix\obj\Debug\Game.Hotfix.dll
 D:\Private\CatLib.ILRuntime\Hotfix\Game.Hotfix\obj\Debug\Game.Hotfix.pdb
-D:\Private\CatLib.ILRuntime\Hotfix\Game.Hotfix\obj\Debug\Game.Hotfix.csprojResolveAssemblyReference.cache

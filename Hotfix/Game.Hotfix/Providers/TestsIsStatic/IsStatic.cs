@@ -9,10 +9,11 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsHasInstance
+using Game.Hotfix.API.TestsIsStatic;
+
+namespace Game.Hotfix.TestsIsStatic
 {
-    public interface IHasInstance
+    public class IsStatic : IIsStatic
     {
-        int GetValue();
     }
 }

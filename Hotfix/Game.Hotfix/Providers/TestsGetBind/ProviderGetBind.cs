@@ -6,13 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Document: http://catlib.io/
+ * Document: https://catlib.io/
  */
 
-using System.Collections;
 using CatLib;
 using Game.Hotfix.API.TestsGetBind;
-using UnityEngine;
+using System.Collections;
+using static CatLib.App;
 
 namespace Game.Hotfix.TestsGetBind
 {
@@ -21,6 +21,18 @@ namespace Game.Hotfix.TestsGetBind
         public override void Init()
         {
             Util.Log("Init() : ProviderGetBind");
+            if (GetBind<IGetBind>() == null)
+            {
+                Util.Faild("GetBind_2");
+                return;
+            }
+
+            if (GetBind<IGetBind>() != GetBind<IGetBind>())
+            {
+                Util.Faild("GetBind_3");
+                return;
+            }
+
             Util.Success("GetBind");
         }
 
@@ -33,26 +45,13 @@ namespace Game.Hotfix.TestsGetBind
         public override void Register()
         {
             Util.Log("Register() : ProviderGetBind");
-            if (App.GetBind<IGetBind>() != null)
+            if (GetBind<IGetBind>() != null)
             {
                 Util.Faild("GetBind_1");
                 return;
             }
 
-            App.Singleton<IGetBind, GetBind>();
-
-            if (App.GetBind<IGetBind>() == null)
-            {
-                Util.Faild("GetBind_2");
-                return;
-            }
-
-            if (App.GetBind<IGetBind>() == App.GetBind<IGetBind>())
-            {
-                return;
-            }
-
-            Util.Faild("GetBind_3");
+            Singleton<IGetBind, GetBind>();
         }
     }
 }

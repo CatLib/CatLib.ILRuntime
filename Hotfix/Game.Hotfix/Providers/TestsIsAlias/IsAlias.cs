@@ -9,10 +9,11 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsHasInstance
+using Game.Hotfix.API.TestsIsAlias;
+
+namespace Game.Hotfix.TestsIsAlias
 {
-    public interface IHasInstance
+    public class IsAlias : IIsAlias
     {
-        int GetValue();
     }
 }
