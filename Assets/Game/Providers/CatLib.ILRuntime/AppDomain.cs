@@ -11,7 +11,9 @@
 
 using System;
 using System.IO;
-using ILRuntime.Runtime.Intepreter;
+using CatLib.API.ILRuntime;
+using CatLib.ILRuntime.Adapter;
+using CatLib.ILRuntime.Redirect;
 using ILRuntimeDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
 namespace CatLib.ILRuntime
@@ -19,25 +21,30 @@ namespace CatLib.ILRuntime
     /// <summary>
     /// ILRuntime AppDomin
     /// </summary>
-    internal sealed class AppDomain
+    public class AppDomain : IAppDomain
     {
         /// <summary>
-        /// ILRuntime AppDomain
+        /// AppDomain
         /// </summary>
-        private readonly ILRuntimeDomain appDomain;
+        protected ILRuntimeDomain Domain { get; private set; }
+
+        /// <summary>
+        /// 调试等级
+        /// </summary>
+        protected DebugLevels DebugLevel { get; private set; }
 
         /// <summary>
         /// 构造一个ILRuntime Appdomain
         /// </summary>
-        public AppDomain()
+        /// <param name="debugLevel">调试等级</param>
+        public AppDomain(DebugLevels debugLevel)
         {
-            appDomain = new ILRuntimeDomain();
-            RegisterDelegate();
-            appDomain.GetType(typeof(ILRuntimeDomain));
-            appDomain.RegisterCrossBindingAdaptor(new AdaptorIDebugger());
+            Domain = new ILRuntimeDomain();
+            DebugLevel = debugLevel;
 
-            Redirect.Redirect.ClrRedirect(appDomain);
-            // global::ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);
+            RegisterDefaultDelegate();
+            RegisterRedirect.Register(Domain);
+            RegisterAdapter.Register(Domain);
         }
 
         /// <summary>
@@ -47,20 +54,24 @@ namespace CatLib.ILRuntime
         /// <param name="symbol">调试符</param>
         public void LoadAssembly(Stream dll, Stream symbol = null)
         {
-            appDomain.LoadAssembly(dll, symbol, new Mono.Cecil.Pdb.PdbReaderProvider());
+            if (DebugLevel == DebugLevels.Production)
+            {
+                symbol = null;
+            }
+            Domain.LoadAssembly(dll, symbol, new Mono.Cecil.Pdb.PdbReaderProvider());
         }
 
         /// <summary>
-        /// 调用入口方法
+        /// 调用热更新中的方法
         /// </summary>
         /// <param name="type">类型全名</param>
         /// <param name="method">调用方法</param>
         /// <param name="instance">类型实例</param>
-        /// <param name="p">传递参数</param>
+        /// <param name="params">传递参数</param>
         /// <returns></returns>
-        public object Invoke(string type, string method, object instance, params object[] p)
+        public object Invoke(string type, string method, object instance, params object[] @params)
         {
-            return appDomain.Invoke(type, method, instance, p);
+            return Domain.Invoke(type, method, instance, @params);
         }
 
         /// <summary>
@@ -69,34 +80,119 @@ namespace CatLib.ILRuntime
         /// <param name="type">类型全名</param>
         /// <param name="args">构造函数参数</param>
         /// <returns></returns>
-        public ILTypeInstance Instantiate(string type, object[] args = null)
+        public object CreateInstance(string type, object[] args = null)
         {
-            return appDomain.Instantiate(type, args);
+            return Domain.Instantiate(type, args);
         }
 
         /// <summary>
-        /// 注册委托关系
+        /// 注册Action委托
         /// </summary>
-        private void RegisterDelegate()
+        public void RegisterActionDelegate<T1>()
         {
-            // TODO: 等整理完成后重构
-            // Action<IApplication>
-            appDomain.DelegateManager.RegisterMethodDelegate<IApplication>();
+            Domain.DelegateManager.RegisterMethodDelegate<T1>();
+        }
 
+        /// <summary>
+        /// 注册Action委托
+        /// </summary>
+        public void RegisterActionDelegate<T1, T2>()
+        {
+            Domain.DelegateManager.RegisterMethodDelegate<T1, T2>();
+        }
+
+        /// <summary>
+        /// 注册Action委托
+        /// </summary>
+        public void RegisterActionDelegate<T1, T2, T3>()
+        {
+            Domain.DelegateManager.RegisterMethodDelegate<T1, T2, T3>();
+        }
+
+        /// <summary>
+        /// 注册Action委托
+        /// </summary>
+        public void RegisterActionDelegate<T1, T2, T3, T4>()
+        {
+            Domain.DelegateManager.RegisterMethodDelegate<T1, T2, T3, T4>();
+        }
+
+        /// <summary>
+        /// 注册Func委托
+        /// </summary>
+        public void RegisterFuncDelegate<TResult>()
+        {
+            Domain.DelegateManager.RegisterFunctionDelegate<TResult>();
+        }
+
+        /// <summary>
+        /// 注册Func委托
+        /// </summary>
+        public void RegisterFuncDelegate<T1, TResult>()
+        {
+            Domain.DelegateManager.RegisterFunctionDelegate<T1, TResult>();
+        }
+
+        /// <summary>
+        /// 注册Func委托
+        /// </summary>
+        public void RegisterFuncDelegate<T1, T2, TResult>()
+        {
+            Domain.DelegateManager.RegisterFunctionDelegate<T1, T2, TResult>();
+        }
+
+        /// <summary>
+        /// 注册Func委托
+        /// </summary>
+        public void RegisterFuncDelegate<T1, T2, T3, TResult>()
+        {
+            Domain.DelegateManager.RegisterFunctionDelegate<T1, T2, T3, TResult>();
+        }
+
+        /// <summary>
+        /// 注册Func委托
+        /// </summary>
+        public void RegisterFuncDelegate<T1, T2, T3, T4, TResult>()
+        {
+            Domain.DelegateManager.RegisterFunctionDelegate<T1, T2, T3, T4, TResult>();
+        }
+
+        /// <summary>
+        /// 注册委托转换器
+        /// </summary>
+        /// <param name="action">转换器实现</param>
+        public void RegisterDelegateConvertor<T>(Func<Delegate, Delegate> action)
+        {
+            Domain.DelegateManager.RegisterDelegateConvertor<T>(action);
+        }
+
+        /// <summary>
+        /// 注册框架默认的委托关系
+        /// </summary>
+        private void RegisterDefaultDelegate()
+        {
+            #region Func
             // Func<object>
-            appDomain.DelegateManager.RegisterFunctionDelegate<object>();
-
-            #region IBindData.cs
+            RegisterFuncDelegate<object>();
+            // Func<string, object[], object>
+            RegisterFuncDelegate<string, object[], object>();
             // Func<IContainer, object[], object>
-            appDomain.DelegateManager.RegisterFunctionDelegate<IContainer, object[], object>();
-            // Func<IBindData, object>
-            appDomain.DelegateManager.RegisterMethodDelegate<IBindData, object>();
+            RegisterFuncDelegate<IContainer, object[], object>();
+            // Func<object, IContainer, object>
+            RegisterFuncDelegate<object, IContainer, object>();
+            // Func<string, Type>
+            RegisterFuncDelegate<string, Type>();
+            // Func<object, object>
+            RegisterFuncDelegate<object, object>();
             #endregion
 
-            #region IContainer.cs
-            // Func<object, IContainer, object>
-            appDomain.DelegateManager.RegisterFunctionDelegate<object, IContainer, object>();
-            appDomain.DelegateManager.RegisterFunctionDelegate<string, Type>();
+            #region Action
+            // Action<IApplication>
+            RegisterActionDelegate<IApplication>();
+            // Action<IBindData, object>
+            RegisterActionDelegate<IBindData, object>();
+            // Action<object>
+            RegisterActionDelegate<object>();
             #endregion
         }
     }

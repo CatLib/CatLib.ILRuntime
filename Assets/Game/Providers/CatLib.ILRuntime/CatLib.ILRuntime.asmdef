@@ -1,7 +1,8 @@
 {
     "name": "CatLib.ILRuntime",
     "references": [
-        "Game.API"
+        "Game.API",
+        "CatLib.Unity"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

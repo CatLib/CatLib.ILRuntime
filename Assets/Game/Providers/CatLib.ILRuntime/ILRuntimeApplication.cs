@@ -10,6 +10,9 @@
  */
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using CatLib.API.ILRuntime;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Intepreter;
 using UnityEngine;
@@ -19,24 +22,30 @@ namespace CatLib.ILRuntime
     /// <summary>
     /// ILRuntime Application
     /// </summary>
-    public class ILRuntimeApplication : Application
+    public class ILRuntimeApplication : UnityApplication
     {
-        /// <summary>
-        /// behaviour
-        /// </summary>
-        private readonly MonoBehaviour behaviour;
-
         /// <summary>
         /// App Domain
         /// </summary>
-        private AppDomain appDomain;
+        private IAppDomain appDomain;
+
+        /// <summary>
+        /// 是否推迟初始化
+        /// </summary>
+        private bool deferInit;
+
+        /// <summary>
+        /// 延迟的服务提供者列表
+        /// </summary>
+        private readonly SortedList<int, List<IServiceProvider>> deferServiceProviders
+            = new SortedList<int, List<IServiceProvider>>();
 
         /// <summary>
         /// Appdomain
         /// </summary>
-        internal AppDomain AppDomain
+        protected IAppDomain AppDomain
         {
-            get { return appDomain ?? (appDomain = App.Make<AppDomain>()); }   
+            get { return appDomain ?? (appDomain = App.Make<IAppDomain>()); }
         }
 
         /// <summary>
@@ -46,16 +55,8 @@ namespace CatLib.ILRuntime
         public ILRuntimeApplication(MonoBehaviour behaviour)
             : base(behaviour)
         {
-            if (behaviour == null)
-            {
-                return;
-            }
-
-            this.Singleton<MonoBehaviour>(() => behaviour)
-                .Alias<Component>();
-            this.behaviour = behaviour;
-
-            App.Extend<ILTypeInstance>(ExtendILRuntimeInstance);
+            deferInit = false;
+            App.Extend<ILTypeInstance>(instance => instance.CLRInstance);
         }
 
         /// <summary>
@@ -68,33 +69,10 @@ namespace CatLib.ILRuntime
         {
             if (makeServiceType is ILRuntimeType || makeServiceType is ILRuntimeWrapperType)
             {
-                return AppDomain.Instantiate(makeServiceType.FullName, userParams);
+                return AppDomain.CreateInstance(makeServiceType.FullName, userParams);
             }
 
             return base.CreateInstance(makeServiceType, userParams);
-        }
-
-        /// <summary>
-        /// 对所有为ILRuntimeInstance类型的实例进行扩展
-        /// </summary>
-        /// <param name="instance">输入实例</param>
-        /// <returns>输出值</returns>
-        protected object ExtendILRuntimeInstance(ILTypeInstance instance)
-        {
-            return instance.CLRInstance;
-        }
-
-        /// <summary>
-        /// 初始化服务提供者
-        /// </summary>
-        public override void Init()
-        {
-            if (behaviour)
-            {
-                behaviour.StartCoroutine(CoroutineInit());
-                return;
-            }
-            base.Init();
         }
 
         /// <summary>
@@ -103,12 +81,75 @@ namespace CatLib.ILRuntime
         /// <param name="provider">服务提供者</param>
         public override void Register(IServiceProvider provider)
         {
-            if (behaviour)
+            if (!deferInit)
             {
-                behaviour.StartCoroutine(CoroutineRegister(provider));
+                base.Register(provider);
                 return;
             }
-            base.Register(provider);
+            StartCoroutine(CoroutineRegister(provider));
+        }
+
+        /// <summary>
+        /// 延缓初始化服务提供者，直到闭包中的服务提供者全部完成注册
+        /// </summary>
+        public void DeferInitServiceProvider(Action closure)
+        {
+            Guard.Requires<ArgumentNullException>(closure != null);
+
+            if (!IsMainThread)
+            {
+                throw new CodeStandardException("Must be call DeferInitServiceProvider in the main thread.");
+            }
+
+            if (deferInit)
+            {
+                throw new CodeStandardException("Already in an DeferInitServiceProvider environment");
+            }
+
+            try
+            {
+                deferInit = true;
+                closure();
+            }
+            finally
+            {
+                deferInit = false;
+                StartCoroutine(RestoreDeferServiceProviders());
+            }
+        }
+
+        /// <summary>
+        /// 恢复顺延初始化的服务提供者
+        /// </summary>
+        private IEnumerator RestoreDeferServiceProviders()
+        {
+            if (deferServiceProviders.Count <= 0)
+            {
+                yield break;
+            }
+
+            foreach (var sorted in deferServiceProviders)
+            {
+                foreach (var provider in sorted.Value)
+                {
+                    yield return InitProvider(provider);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 初始化服务提供者
+        /// </summary>
+        /// <param name="provider">服务提供者</param>
+        /// <returns></returns>
+        protected override IEnumerator InitProvider(IServiceProvider provider)
+        {
+            if (deferInit)
+            {
+                AddSortedList(deferServiceProviders, provider, "Init");
+                yield break;
+            }
+            yield return base.InitProvider(provider);
         }
     }
 }

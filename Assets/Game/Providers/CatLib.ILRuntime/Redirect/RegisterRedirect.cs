@@ -16,13 +16,13 @@ namespace CatLib.ILRuntime.Redirect
     /// <summary>
     /// 重定向App
     /// </summary>
-    public static class Redirect
+    public static class RegisterRedirect
     {
         /// <summary>
-        /// CLR重定向
+        /// 注册CLR重定向
         /// </summary>
         /// <param name="appDomain">AppDomain</param>
-        public static void ClrRedirect(ILRuntimeDomain appDomain)
+        public static void Register(ILRuntimeDomain appDomain)
         {
             RedirectApp.Register(appDomain);
             RedirectExtendContainer.Register(appDomain);

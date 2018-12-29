@@ -10,6 +10,7 @@
  */
 
 using System.Collections;
+using CatLib.API.ILRuntime;
 
 namespace CatLib.ILRuntime
 {
@@ -50,9 +51,19 @@ namespace CatLib.ILRuntime
         {
             App.On(ApplicationEvents.OnInited, () =>
             {
-                var domain = App.Make<AppDomain>();
+                var domain = App.Make<IAppDomain>();
                 var method = Str.Method(Main);
-                domain.Invoke(Main.Substring(0, Main.Length - method.Length).TrimEnd('.'), method, null, App.Handler);
+                var type = Main.Substring(0, Main.Length - method.Length).TrimEnd('.');
+
+                var application = App.Handler as ILRuntimeApplication;
+                if (application != null)
+                {
+                    application.DeferInitServiceProvider(
+                        () => domain.Invoke(type, method, null, App.Handler));
+                    return;
+                }
+
+                domain.Invoke(type, method, null, App.Handler);
             });
         }
 
@@ -62,7 +73,12 @@ namespace CatLib.ILRuntime
         /// <returns>迭代器</returns>
         public override IEnumerator CoroutineInit()
         {
-            var domain = App.Make<AppDomain>();
+            var domain = App.Make<IAppDomain>() as AppDomain;
+            if (domain == null)
+            {
+                yield break;
+            }
+
             foreach (var assembly in GetAssemblies())
             {
                 using (var loader = App.Make<LoaderAssembly>())
@@ -78,7 +94,7 @@ namespace CatLib.ILRuntime
         /// </summary>
         public override void Register()
         {
-            App.Singleton<AppDomain>();
+            App.Singleton<IAppDomain, AppDomain>();
             App.Bind<LoaderAssembly>();
         }
     }

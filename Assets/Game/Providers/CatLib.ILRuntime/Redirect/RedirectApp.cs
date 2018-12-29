@@ -35,6 +35,7 @@ namespace CatLib.ILRuntime.Redirect
         {
             mapping = new RedirectMapping();
 
+            mapping.Register("HasInstance", 1, 0, HasInstance_TService);
             mapping.Register("Singleton", 2, 0, Singleton_TService_TConcrete);
             mapping.Register("Singleton", 1, 0, Singleton_TService);
             mapping.Register("Make", 1, 1, Make);
@@ -58,6 +59,21 @@ namespace CatLib.ILRuntime.Redirect
 
                 appDomain.RegisterCLRMethodRedirection(method, redirection);
             }
+        }
+
+        // public static bool HasInstance<TService>()
+        public static StackObject* HasInstance_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            return ILIntepreter.PushObject(esp, mStack, App.HasInstance(tService));
         }
 
         // public static IBindData Singleton<TService, TConcrete>()

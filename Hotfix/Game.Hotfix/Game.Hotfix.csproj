@@ -54,12 +54,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelloWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers.cs" />
+    <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
+    <Compile Include="Providers\TestsHasInstance\HasInstance.cs" />
+    <Compile Include="Providers\TestsHasInstance\ProviderHasInstance.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Providers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

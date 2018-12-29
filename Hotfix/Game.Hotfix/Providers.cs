@@ -6,22 +6,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Document: http://catlib.io/
+ * Document: https://catlib.io/
  */
+
+using CatLib;
+using Game.Hotfix.TestsHasInstance;
 
 namespace Game.Hotfix
 {
     /// <summary>
-    /// Hello World
+    /// 项目注册的服务提供者
     /// </summary>
-    public sealed class HelloWorld
+    public static class Providers
     {
         /// <summary>
-        /// 返回 Hello World
+        /// 项目注册的服务提供者
         /// </summary>
-        public static string GetValue()
+        public static IServiceProvider[] ServiceProviders => new IServiceProvider[]
         {
-            return "hello world";
-        }
+            new ProviderHasInstance(), 
+        };
     }
 }
