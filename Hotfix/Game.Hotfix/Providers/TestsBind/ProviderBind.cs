@@ -27,7 +27,7 @@ namespace Game.Hotfix.TestsBind
                 return;
             }
 
-            if (Make<IBind>() == null)
+            if (Make<IBind1>() == null)
             {
                 Util.Faild("bind_2");
                 return;
@@ -64,7 +64,7 @@ namespace Game.Hotfix.TestsBind
         public override void Register()
         {
             Bind<Bind>().Alias("bind_1");
-            Bind<IBind, Bind>();
+            Bind<IBind1, Bind>();
             Bind<IBind2>(() => new Bind());
             Bind<IBind3>((p) => new Bind());
             Bind<IBind4>((c, p) => new Bind());

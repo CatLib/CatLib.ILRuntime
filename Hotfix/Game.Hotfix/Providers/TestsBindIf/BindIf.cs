@@ -13,7 +13,7 @@ using Game.Hotfix.API.TestsBindIf;
 
 namespace Game.Hotfix.TestsBindIf
 {
-    public class BindIf : IBindIf, IBindIf2, IBindIf3, IBindIf4
+    public class BindIf : IBindIf1, IBindIf2, IBindIf3, IBindIf4
     {
     }
 }

@@ -9,9 +9,9 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsBindIf
+namespace Game.Hotfix.API.TestsBind
 {
-    public interface IBindIf
+    public interface IBind1
     {
     }
 }

@@ -60,11 +60,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
     <Compile Include="Providers\API\TestsAlias\IAlias.cs" />
-    <Compile Include="Providers\API\TestsBindIf\IBindIf.cs" />
+    <Compile Include="Providers\API\TestsBindIf\IBindIf1.cs" />
     <Compile Include="Providers\API\TestsBindIf\IBindIf2.cs" />
     <Compile Include="Providers\API\TestsBindIf\IBindIf3.cs" />
     <Compile Include="Providers\API\TestsBindIf\IBindIf4.cs" />
-    <Compile Include="Providers\API\TestsBind\IBind.cs" />
+    <Compile Include="Providers\API\TestsBind\IBind1.cs" />
     <Compile Include="Providers\API\TestsBind\IBind2.cs" />
     <Compile Include="Providers\API\TestsBind\IBind3.cs" />
     <Compile Include="Providers\API\TestsBind\IBind4.cs" />
@@ -76,6 +76,14 @@
     <Compile Include="Providers\API\TestsIsAlias\IIsAlias.cs" />
     <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
     <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
+    <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf1.cs" />
+    <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf2.cs" />
+    <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf3.cs" />
+    <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf4.cs" />
+    <Compile Include="Providers\API\TestsSingleton\ISingleton2.cs" />
+    <Compile Include="Providers\API\TestsSingleton\ISingleton1.cs" />
+    <Compile Include="Providers\API\TestsSingleton\ISingleton3.cs" />
+    <Compile Include="Providers\API\TestsSingleton\ISingleton4.cs" />
     <Compile Include="Providers\TestsAlias\Alias.cs" />
     <Compile Include="Providers\TestsAlias\ProviderAlias.cs" />
     <Compile Include="Providers\TestsBindIf\BindIf.cs" />
@@ -98,6 +106,10 @@
     <Compile Include="Providers\TestsIsResolved\ProviderIsResolved.cs" />
     <Compile Include="Providers\TestsIsStatic\IsStatic.cs" />
     <Compile Include="Providers\TestsIsStatic\ProviderIsStatic.cs" />
+    <Compile Include="Providers\TestsSingletonIf\ProviderSingletonIf.cs" />
+    <Compile Include="Providers\TestsSingletonIf\SingletonIf.cs" />
+    <Compile Include="Providers\TestsSingleton\ProviderSingleton.cs" />
+    <Compile Include="Providers\TestsSingleton\Singleton.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup />

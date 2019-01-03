@@ -27,7 +27,7 @@ namespace Game.Hotfix.TestsBindIf
                 return;
             }
 
-            if (Make<IBindIf>() == null)
+            if (Make<IBindIf1>() == null)
             {
                 Util.Faild("BindIf_8");
                 return;
@@ -74,7 +74,7 @@ namespace Game.Hotfix.TestsBindIf
                 Util.Faild("BindIf_1");
             }
 
-            if (!BindIf<IBindIf, BindIf>(out bindData) || bindData == null)
+            if (!BindIf<IBindIf1, BindIf>(out bindData) || bindData == null)
             {
                 Util.Faild("BindIf_2");
             }

@@ -21,6 +21,8 @@ using Game.Hotfix.TestsHasInstance;
 using Game.Hotfix.TestsIsAlias;
 using Game.Hotfix.TestsIsResolved;
 using Game.Hotfix.TestsIsStatic;
+using Game.Hotfix.TestsSingleton;
+using Game.Hotfix.TestsSingletonIf;
 
 namespace Game.Hotfix
 {
@@ -45,6 +47,8 @@ namespace Game.Hotfix
             new ProviderExtend(),
             new ProviderBind(),
             new ProviderBindIf(), 
+            new ProviderSingleton(), 
+            new ProviderSingletonIf()
         };
     }
 }

@@ -48,6 +48,7 @@ namespace CatLib.ILRuntime.Redirect
             RegisterBind();
             RegisterBindIf();
             RegisterSingleton();
+            RegisterSingletonIf();
 
             mapping.Register("Make", 1, 1, Make);
         }

@@ -9,11 +9,11 @@
  * Document: https://catlib.io/
  */
 
-using Game.Hotfix.API.TestsBind;
+using Game.Hotfix.API.TestsSingleton;
 
-namespace Game.Hotfix.TestsBind
+namespace Game.Hotfix.TestsSingletonIf
 {
-    public class Bind : IBind1, IBind2, IBind3, IBind4
+    public class SingletonIf : ISingleton1, ISingleton2, ISingleton3, ISingleton4
     {
     }
 }
