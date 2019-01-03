@@ -547,9 +547,25 @@
             <param name="service">服务名</param>
             <param name="closure">闭包</param>
         </member>
-        <member name="M:CatLib.App.Extend``1(System.Func{``0,CatLib.IContainer,System.Object})">
+        <member name="M:CatLib.App.Extend``2(System.Func{``1,System.Object})">
             <summary>
             扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:CatLib.App.Extend``2(System.Func{``1,CatLib.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:CatLib.App.Extend``1(System.Func{``0,CatLib.IContainer,System.Object})">
+            <summary>
+            扩展容器中的全部服务
             <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
             </summary>
             <typeparam name="TConcrete">实现的类型或接口</typeparam>
@@ -557,7 +573,7 @@
         </member>
         <member name="M:CatLib.App.Extend``1(System.Func{``0,System.Object})">
             <summary>
-            扩展容器中的服务
+            扩展容器中的全部服务
             <para>如果构建的实例符合指定的类型或者接口，那么触发扩展闭包</para>
             </summary>
             <typeparam name="TConcrete">实现的类型或接口</typeparam>
@@ -579,6 +595,14 @@
             <returns>服务绑定数据</returns>
         </member>
         <member name="M:CatLib.App.Bind``1(System.Func{CatLib.IContainer,System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
+        <member name="M:CatLib.App.Bind``1(System.Func{System.Object[],System.Object})">
             <summary>
             常规绑定一个服务
             </summary>
@@ -628,6 +652,15 @@
             <param name="bindData">如果绑定失败则返回历史绑定对象</param>
             <returns>是否完成绑定</returns>
         </member>
+        <member name="M:CatLib.App.BindIf``1(System.Func{System.Object[],System.Object},CatLib.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
         <member name="M:CatLib.App.BindIf``1(System.Func{System.Object},CatLib.IBindData@)">
             <summary>
             如果服务不存在那么则绑定服务
@@ -669,6 +702,14 @@
             <param name="concrete">服务实现</param>
             <returns>服务绑定数据</returns>
         </member>
+        <member name="M:CatLib.App.Singleton``1(System.Func{System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
         <member name="M:CatLib.App.Singleton``1(System.Func{System.Object})">
             <summary>
             以单例的形式绑定一个服务
@@ -703,6 +744,15 @@
             <returns>是否完成绑定</returns>
         </member>
         <member name="M:CatLib.App.SingletonIf``1(System.Func{CatLib.IContainer,System.Object[],System.Object},CatLib.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:CatLib.App.SingletonIf``1(System.Func{System.Object[],System.Object},CatLib.IBindData@)">
             <summary>
             如果服务不存在那么则绑定服务
             </summary>
@@ -1330,6 +1380,12 @@
             </summary>
             <param name="method">函数名</param>
         </member>
+        <member name="M:CatLib.Application.StartCoroutine(System.Collections.IEnumerator)">
+            <summary>
+            启动迭代器
+            </summary>
+            <param name="coroutine">迭代程序</param>
+        </member>
         <member name="M:CatLib.Application.RegisterCoreAlias">
             <summary>
             注册核心别名
@@ -1346,12 +1402,6 @@
             </summary>
             <param name="provider">服务提供者</param>
             <returns>基础类型</returns>
-        </member>
-        <member name="M:CatLib.Application.StartCoroutine(System.Collections.IEnumerator)">
-            <summary>
-            启动迭代器
-            </summary>
-            <param name="coroutine">迭代程序</param>
         </member>
         <member name="T:CatLib.ApplicationEvents">
             <summary>
@@ -3753,6 +3803,15 @@
             <param name="concrete">服务实现</param>
             <returns>服务绑定数据</returns>
         </member>
+        <member name="M:CatLib.ExtendContainer.Bind``1(CatLib.IContainer,System.Func{System.Object[],System.Object})">
+            <summary>
+            常规绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
         <member name="M:CatLib.ExtendContainer.Bind``1(CatLib.IContainer,System.Func{System.Object})">
             <summary>
             常规绑定一个服务
@@ -3791,6 +3850,16 @@
             <returns>是否完成绑定</returns>
         </member>
         <member name="M:CatLib.ExtendContainer.BindIf``1(CatLib.IContainer,System.Func{CatLib.IContainer,System.Object[],System.Object},CatLib.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:CatLib.ExtendContainer.BindIf``1(CatLib.IContainer,System.Func{System.Object[],System.Object},CatLib.IBindData@)">
             <summary>
             如果服务不存在那么则绑定服务
             </summary>
@@ -3855,6 +3924,15 @@
             <param name="concrete">服务实现</param>
             <returns>服务绑定数据</returns>
         </member>
+        <member name="M:CatLib.ExtendContainer.Singleton``1(CatLib.IContainer,System.Func{System.Object[],System.Object})">
+            <summary>
+            以单例的形式绑定一个服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <returns>服务绑定数据</returns>
+        </member>
         <member name="M:CatLib.ExtendContainer.Singleton``1(CatLib.IContainer,System.Func{System.Object})">
             <summary>
             以单例的形式绑定一个服务
@@ -3894,6 +3972,16 @@
             <returns>是否完成绑定</returns>
         </member>
         <member name="M:CatLib.ExtendContainer.SingletonIf``1(CatLib.IContainer,System.Func{System.Object},CatLib.IBindData@)">
+            <summary>
+            如果服务不存在那么则绑定服务
+            </summary>
+            <typeparam name="TService">服务名</typeparam>
+            <param name="container">服务容器</param>
+            <param name="concrete">服务实现</param>
+            <param name="bindData">如果绑定失败则返回历史绑定对象</param>
+            <returns>是否完成绑定</returns>
+        </member>
+        <member name="M:CatLib.ExtendContainer.SingletonIf``1(CatLib.IContainer,System.Func{System.Object[],System.Object},CatLib.IBindData@)">
             <summary>
             如果服务不存在那么则绑定服务
             </summary>
@@ -4115,6 +4203,24 @@
             </summary>
             <param name="container">服务容器</param>
             <param name="service">服务名</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:CatLib.ExtendContainer.Extend``2(CatLib.IContainer,System.Func{``1,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="container">服务容器</param>
+            <param name="closure">闭包</param>
+        </member>
+        <member name="M:CatLib.ExtendContainer.Extend``2(CatLib.IContainer,System.Func{``1,CatLib.IContainer,System.Object})">
+            <summary>
+            扩展容器中的服务
+            <para>允许在服务构建的过程中配置或者替换服务</para>
+            <para>如果服务已经被构建，拓展会立即生效。</para>
+            </summary>
+            <param name="container">服务容器</param>
             <param name="closure">闭包</param>
         </member>
         <member name="M:CatLib.ExtendContainer.Extend``1(CatLib.IContainer,System.Func{``0,CatLib.IContainer,System.Object})">

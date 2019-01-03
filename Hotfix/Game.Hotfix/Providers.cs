@@ -10,7 +10,11 @@
  */
 
 using CatLib;
+using Game.Hotfix.TestsAlias;
+using Game.Hotfix.TestsBind;
+using Game.Hotfix.TestsBindIf;
 using Game.Hotfix.TestsCanMake;
+using Game.Hotfix.TestsExtend;
 using Game.Hotfix.TestsGetBind;
 using Game.Hotfix.TestsHasBind;
 using Game.Hotfix.TestsHasInstance;
@@ -37,6 +41,10 @@ namespace Game.Hotfix
             new ProviderCanMake(), 
             new ProviderIsStatic(),
             new ProviderIsAlias(), 
+            new ProviderAlias(), 
+            new ProviderExtend(),
+            new ProviderBind(),
+            new ProviderBindIf(), 
         };
     }
 }

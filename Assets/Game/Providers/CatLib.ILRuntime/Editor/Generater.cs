@@ -35,6 +35,7 @@ namespace CatLib.ILRuntime
                 typeof(string),
                 typeof(Array),
                 typeof(Dictionary<string, int>),
+                typeof(App),
                 typeof(Dictionary<global::ILRuntime.Runtime.Intepreter.ILTypeInstance, int>)
             };
 

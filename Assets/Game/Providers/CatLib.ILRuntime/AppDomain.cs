@@ -14,6 +14,7 @@ using System.IO;
 using CatLib.API.ILRuntime;
 using CatLib.ILRuntime.Adapter;
 using CatLib.ILRuntime.Redirect;
+using ILRuntime.Runtime.Intepreter;
 using ILRuntimeDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
 namespace CatLib.ILRuntime
@@ -45,6 +46,8 @@ namespace CatLib.ILRuntime
             RegisterDefaultDelegate();
             RegisterRedirect.Register(Domain);
             RegisterAdapter.Register(Domain);
+
+            // TODO：注册clr绑定
         }
 
         /// <summary>
@@ -184,6 +187,13 @@ namespace CatLib.ILRuntime
             RegisterFuncDelegate<string, Type>();
             // Func<object, object>
             RegisterFuncDelegate<object, object>();
+            // Func<object[], object>
+            RegisterFuncDelegate<object[], object>();
+            // Func<ILTypeInstance, IContainer, Object>
+            RegisterFuncDelegate<ILTypeInstance, IContainer, object>();
+            // Func<ILTypeInstance, Object>
+            RegisterFuncDelegate<ILTypeInstance, object>();
+
             #endregion
 
             #region Action

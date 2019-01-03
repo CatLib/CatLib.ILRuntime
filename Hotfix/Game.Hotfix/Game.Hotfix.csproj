@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game.Hotfix</RootNamespace>
     <AssemblyName>Game.Hotfix</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +45,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
       <HintPath>lib\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -57,15 +59,31 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
+    <Compile Include="Providers\API\TestsAlias\IAlias.cs" />
+    <Compile Include="Providers\API\TestsBindIf\IBindIf.cs" />
+    <Compile Include="Providers\API\TestsBindIf\IBindIf2.cs" />
+    <Compile Include="Providers\API\TestsBindIf\IBindIf3.cs" />
+    <Compile Include="Providers\API\TestsBindIf\IBindIf4.cs" />
+    <Compile Include="Providers\API\TestsBind\IBind.cs" />
+    <Compile Include="Providers\API\TestsBind\IBind2.cs" />
     <Compile Include="Providers\API\TestsCanMake\ICanMake.cs" />
+    <Compile Include="Providers\API\TestsExtend\IExtend.cs" />
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
     <Compile Include="Providers\API\TestsHasBind\IHasBind.cs" />
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
     <Compile Include="Providers\API\TestsIsAlias\IIsAlias.cs" />
     <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
     <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
+    <Compile Include="Providers\TestsAlias\Alias.cs" />
+    <Compile Include="Providers\TestsAlias\ProviderAlias.cs" />
+    <Compile Include="Providers\TestsBindIf\BindIf.cs" />
+    <Compile Include="Providers\TestsBindIf\ProviderBindIf.cs" />
+    <Compile Include="Providers\TestsBind\Bind.cs" />
+    <Compile Include="Providers\TestsBind\ProviderBind.cs" />
     <Compile Include="Providers\TestsCanMake\CanMake.cs" />
     <Compile Include="Providers\TestsCanMake\ProviderCanMake.cs" />
+    <Compile Include="Providers\TestsExtend\Extend.cs" />
+    <Compile Include="Providers\TestsExtend\ProviderExtend.cs" />
     <Compile Include="Providers\TestsGetBind\GetBind.cs" />
     <Compile Include="Providers\TestsGetBind\ProviderGetBind.cs" />
     <Compile Include="Providers\TestsHasBind\HasBind.cs" />

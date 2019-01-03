@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -8,6 +9,8 @@ using ILRuntime.CLR.Method;
 using ILRuntime.Other;
 using Mono.Cecil;
 using ILRuntime.Runtime.Intepreter;
+using UnityEngine.Experimental.Playables;
+
 namespace ILRuntime.CLR.Utils
 {
     public delegate TResult Func<T1, T2, T3, T4, T5, TResult>(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5);
@@ -241,7 +244,13 @@ namespace ILRuntime.CLR.Utils
                     return obj;
                 if (pt == typeof(Delegate))
                     return ((IDelegateAdapter)obj).Delegate;
-                return ((IDelegateAdapter)obj).GetConvertor(pt);
+
+                if (obj is IDelegateAdapter)
+                {
+                    return ((IDelegateAdapter)obj).Delegate;
+                }
+
+                return ((IDelegateAdapter)obj).GetConvertor(pt); 
             }
             else if ((typeFlags & TypeFlags.IsByRef) != 0)
             {

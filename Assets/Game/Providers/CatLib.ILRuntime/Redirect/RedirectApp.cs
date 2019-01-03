@@ -21,7 +21,7 @@ namespace CatLib.ILRuntime.Redirect
     /// <summary>
     /// App.cs 重定向
     /// </summary>
-    internal static unsafe class RedirectApp
+    internal static unsafe partial class RedirectApp
     {
         /// <summary>
         /// 重定向映射表
@@ -43,6 +43,11 @@ namespace CatLib.ILRuntime.Redirect
             mapping.Register("IsStatic", 1, 0, IsStatic_TService);
             mapping.Register("IsAlias", 1, 0, IsAlias_TService);
             mapping.Register("Alias", 2, 0, Alias_TAlias_TService);
+
+            RegisterExtend();
+            RegisterBind();
+            RegisterBindIf();
+
             mapping.Register("Singleton", 2, 0, Singleton_TService_TConcrete);
             mapping.Register("Singleton", 1, 0, Singleton_TService);
             mapping.Register("Make", 1, 1, Make);
@@ -58,7 +63,6 @@ namespace CatLib.ILRuntime.Redirect
             foreach (var method in methods)
             {
                 var redirection = mapping.GetRedirection(method);
-
                 if (redirection == null)
                 {
                     continue;
@@ -69,7 +73,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static IBindData GetBind<TService>()
-        public static StackObject* GetBind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* GetBind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -84,7 +88,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool HasInstance<TService>()
-        public static StackObject* HasInstance_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* HasInstance_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -99,7 +103,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool IsResolved<TService>()
-        public static StackObject* IsResolved_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* IsResolved_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -114,7 +118,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool HasBind<TService>()
-        public static StackObject* HasBind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* HasBind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -129,7 +133,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool CanMake<TService>()
-        public static StackObject* CanMake_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* CanMake_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -144,7 +148,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool IsStatic<TService>()
-        public static StackObject* IsStatic_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* IsStatic_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -159,7 +163,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static bool Alias<TService>()
-        public static StackObject* IsAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* IsAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -174,7 +178,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static IContainer Alias<TAlias, TService>()
-        public static StackObject* Alias_TAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* Alias_TAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -190,7 +194,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static IBindData Singleton<TService, TConcrete>()
-        public static StackObject* Singleton_TService_TConcrete(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* Singleton_TService_TConcrete(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -206,7 +210,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static IBindData Singleton<TService>()
-        public static StackObject* Singleton_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* Singleton_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -222,7 +226,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static TService Make<TService>(params object[] userParams)
-        public static StackObject* Make(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* Make(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
