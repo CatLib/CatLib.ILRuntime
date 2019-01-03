@@ -70,6 +70,7 @@
     <Compile Include="Providers\API\TestsBind\IBind4.cs" />
     <Compile Include="Providers\API\TestsCanMake\ICanMake.cs" />
     <Compile Include="Providers\API\TestsExtend\IExtend.cs" />
+    <Compile Include="Providers\API\TestsFactory\IFactory.cs" />
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
     <Compile Include="Providers\API\TestsHasBind\IHasBind.cs" />
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
@@ -99,6 +100,8 @@
     <Compile Include="Providers\TestsCanMake\ProviderCanMake.cs" />
     <Compile Include="Providers\TestsExtend\Extend.cs" />
     <Compile Include="Providers\TestsExtend\ProviderExtend.cs" />
+    <Compile Include="Providers\TestsFactory\Factory.cs" />
+    <Compile Include="Providers\TestsFactory\ProviderFactory.cs" />
     <Compile Include="Providers\TestsGetBind\GetBind.cs" />
     <Compile Include="Providers\TestsGetBind\ProviderGetBind.cs" />
     <Compile Include="Providers\TestsHasBind\HasBind.cs" />

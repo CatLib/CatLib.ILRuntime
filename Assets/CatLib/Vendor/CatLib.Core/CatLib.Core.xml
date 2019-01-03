@@ -415,11 +415,12 @@
             <param name="userParams">用户传入的参数</param>
             <returns>服务实例，如果构造失败那么返回null</returns>
         </member>
-        <member name="M:CatLib.App.Factory(System.String)">
+        <member name="M:CatLib.App.Factory(System.String,System.Object[])">
             <summary>
             获取一个回调，当执行回调可以生成指定的服务
             </summary>
             <param name="service">服务名或别名</param>
+            <param name="userParams">用户提供的参数</param>
             <returns>回调方案</returns>
         </member>
         <member name="M:CatLib.App.Alias(System.String,System.String)">

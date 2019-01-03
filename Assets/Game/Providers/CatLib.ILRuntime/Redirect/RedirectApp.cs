@@ -48,7 +48,8 @@ namespace CatLib.ILRuntime.Redirect
             mapping.Register("Tag", 1, 1, Tag_TService_String);
             mapping.Register("Instance", 1, 1, Instance_TService_Object);
             mapping.Register("Release", 1, 0, Release_TService);
-            mapping.Register("Make", 1, 1, Make);
+            mapping.Register("Make", 1, 1, Make_TService_ArrObject);
+            mapping.Register("Factory", 1, 1, Factory_TService_ArrObject);
 
             RegisterExtend();
             RegisterBind();
@@ -281,7 +282,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static TService Make<TService>(params object[] userParams)
-        private static StackObject* Make(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        private static StackObject* Make_TService_ArrObject(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -302,6 +303,30 @@ namespace CatLib.ILRuntime.Redirect
             intp.Free(ptrOfThisMethod);
 
             return ILIntepreter.PushObject(esp, mStack, App.Make(tService, userParams));
+        }
+
+        // public static Func<TService> Factory<TService>(params object[] userParams)
+        private static StackObject* Factory_TService_ArrObject(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 1)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var userParams =
+                (object[])typeof(object[]).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            return ILIntepreter.PushObject(esp, mStack, App.Factory(tService, userParams));
         }
     }
 }

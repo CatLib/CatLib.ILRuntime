@@ -15,6 +15,7 @@ using Game.Hotfix.TestsBind;
 using Game.Hotfix.TestsBindIf;
 using Game.Hotfix.TestsCanMake;
 using Game.Hotfix.TestsExtend;
+using Game.Hotfix.TestsFactory;
 using Game.Hotfix.TestsGetBind;
 using Game.Hotfix.TestsHasBind;
 using Game.Hotfix.TestsHasInstance;
@@ -59,6 +60,7 @@ namespace Game.Hotfix
             new ProviderInstance(),
             new ProviderRelease(),
             new ProviderMake(), 
+            new ProviderFactory(),
         };
     }
 }
