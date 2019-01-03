@@ -21,24 +21,33 @@ namespace Game.Hotfix.TestsBind
         public override void Init()
         {
             Util.Log("Init() : ProviderBind");
-            var bind_1 = Make("bind_1");
-            if (bind_1 == null)
+            if (Make("bind_1") == null)
             {
                 Util.Faild("bind_1");
                 return;
             }
 
-            var bind_2 = Make<IBind>();
-            if (bind_2 == null)
+            if (Make<IBind>() == null)
             {
                 Util.Faild("bind_2");
                 return;
             }
 
-            var bind_3 = Make<IBind2>();
-            if (bind_3 == null)
+            if (Make<IBind2>() == null)
             {
                 Util.Faild("bind_3");
+                return;
+            }
+
+            if (Make<IBind3>() == null)
+            {
+                Util.Faild("bind_4");
+                return;
+            }
+
+            if (Make<IBind4>() == null)
+            {
+                Util.Faild("bind_5");
                 return;
             }
 
@@ -57,8 +66,8 @@ namespace Game.Hotfix.TestsBind
             Bind<Bind>().Alias("bind_1");
             Bind<IBind, Bind>();
             Bind<IBind2>(() => new Bind());
-            // TODO: public static IBindData Bind<TService>(Func<object[], object> concrete)
-            // TODO: public static IBindData Bind<TService>(Func<IContainer, object[], object> concrete)
+            Bind<IBind3>((p) => new Bind());
+            Bind<IBind4>((c, p) => new Bind());
         }
     }
 }

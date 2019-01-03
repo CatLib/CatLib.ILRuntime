@@ -23,26 +23,26 @@ namespace CatLib.ILRuntime.Redirect
     /// </summary>
     internal static unsafe partial class RedirectApp
     {
-        private static void RegisterBind()
+        private static void RegisterSingleton()
         {
-            mapping.Register("Bind", 1, 0, Bind_TService);
-            mapping.Register("Bind", 2, 0, Bind_TService_TConcrete);
-            mapping.Register("Bind", 1, 1, new string[]
+            mapping.Register("Singleton", 1, 0, Singleton_TService);
+            mapping.Register("Singleton", 2, 0, Singleton_TService_TConcrete);
+            mapping.Register("Singleton", 1, 1, new string[]
             {
                 "System.Func`1[System.Object]"
-            }, Bind_TService_Func1);
-            mapping.Register("Bind", 1, 1, new string[]
+            }, Singleton_TService_Func1);
+            mapping.Register("Singleton", 1, 1, new string[]
             {
                 "System.Func`2[System.Object[],System.Object]"
-            }, Bind_TService_Func2);
-            mapping.Register("Bind", 1, 1, new string[]
+            }, Singleton_TService_Func2);
+            mapping.Register("Singleton", 1, 1, new string[]
             {
                 "System.Func`3[CatLib.IContainer,System.Object[],System.Object]"
-            }, Bind_TService_Func3);
+            }, Singleton_TService_Func3);
         }
 
-        // public static IBindData Bind<TService>()
-        private static StackObject* Bind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        // public static IBindData Singleton<TService>()
+        private static StackObject* Singleton_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -52,13 +52,13 @@ namespace CatLib.ILRuntime.Redirect
             }
 
             var tService = Helper.ITypeToService(genericArguments[0]);
-            var tType = Helper.ITypeToClrType(genericArguments[0]);
+            var tConcrete = Helper.ITypeToClrType(genericArguments[0]);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tType, false));
+            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tConcrete, true));
         }
 
-        // public static IBindData Bind<TService, TConcrete>()
-        private static StackObject* Bind_TService_TConcrete(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        // public static IBindData Singleton<TService, TConcrete>()
+        private static StackObject* Singleton_TService_TConcrete(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -68,13 +68,13 @@ namespace CatLib.ILRuntime.Redirect
             }
 
             var tService = Helper.ITypeToService(genericArguments[0]);
-            var tType = Helper.ITypeToClrType(genericArguments[1]);
+            var tConcrete = Helper.ITypeToClrType(genericArguments[1]);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tType, false));
+            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tConcrete, true));
         }
 
-        // public static IBindData Bind<TService>(Func<IContainer, object[], object> concrete)
-        private static StackObject* Bind_TService_Func3(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        // public static IBindData Singleton<TService>(Func<IContainer, object[], object> concrete)
+        private static StackObject* Singleton_TService_Func3(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -97,11 +97,11 @@ namespace CatLib.ILRuntime.Redirect
             intp.Free(ptrOfThisMethod);
 
             return ILIntepreter.PushObject(ret, mStack,
-                App.Bind(tService, (container, @params) => closure(container, @params), false));
+                App.Bind(tService, (container, @params) => closure(container, @params), true));
         }
 
-        // public static IBindData Bind<TService>(Func<object[], object> concrete)
-        private static StackObject* Bind_TService_Func2(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        // public static IBindData Singleton<TService>(Func<object[], object> concrete)
+        private static StackObject* Singleton_TService_Func2(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -124,11 +124,11 @@ namespace CatLib.ILRuntime.Redirect
             intp.Free(ptrOfThisMethod);
 
             return ILIntepreter.PushObject(ret, mStack,
-                App.Bind(tService, (container, @params) => closure(@params), false));
+                App.Bind(tService, (container, @params) => closure(@params), true));
         }
 
-        // public static IBindData Bind<TService>(Func<object> concrete)
-        private static StackObject* Bind_TService_Func1(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        // public static IBindData Singleton<TService>(Func<object> concrete)
+        private static StackObject* Singleton_TService_Func1(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -151,7 +151,7 @@ namespace CatLib.ILRuntime.Redirect
             intp.Free(ptrOfThisMethod);
 
             return ILIntepreter.PushObject(ret, mStack,
-                App.Bind(tService, (container, @params) => closure(), false));
+                App.Bind(tService, (container, @params) => closure(), true));
         }
     }
 }

@@ -66,6 +66,8 @@
     <Compile Include="Providers\API\TestsBindIf\IBindIf4.cs" />
     <Compile Include="Providers\API\TestsBind\IBind.cs" />
     <Compile Include="Providers\API\TestsBind\IBind2.cs" />
+    <Compile Include="Providers\API\TestsBind\IBind3.cs" />
+    <Compile Include="Providers\API\TestsBind\IBind4.cs" />
     <Compile Include="Providers\API\TestsCanMake\ICanMake.cs" />
     <Compile Include="Providers\API\TestsExtend\IExtend.cs" />
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />

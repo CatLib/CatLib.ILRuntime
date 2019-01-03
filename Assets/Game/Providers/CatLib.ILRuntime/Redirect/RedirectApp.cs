@@ -47,9 +47,8 @@ namespace CatLib.ILRuntime.Redirect
             RegisterExtend();
             RegisterBind();
             RegisterBindIf();
+            RegisterSingleton();
 
-            mapping.Register("Singleton", 2, 0, Singleton_TService_TConcrete);
-            mapping.Register("Singleton", 1, 0, Singleton_TService);
             mapping.Register("Make", 1, 1, Make);
         }
 
@@ -191,38 +190,6 @@ namespace CatLib.ILRuntime.Redirect
             var tService = Helper.ITypeToService(genericArguments[1]);
 
             return ILIntepreter.PushObject(esp, mStack, App.Alias(tAlias, tService));
-        }
-
-        // public static IBindData Singleton<TService, TConcrete>()
-        private static StackObject* Singleton_TService_TConcrete(ILIntepreter intp, StackObject* esp, IList<object> mStack,
-            CLRMethod method, bool isNewObj)
-        {
-            var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 2 || method.ParameterCount != 0)
-            {
-                throw new EntryPointNotFoundException();
-            }
-
-            var tService  = Helper.ITypeToService(genericArguments[0]);
-            var tConcrete = Helper.ITypeToClrType(genericArguments[1]);
-
-            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tConcrete, true));
-        }
-
-        // public static IBindData Singleton<TService>()
-        private static StackObject* Singleton_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
-            CLRMethod method, bool isNewObj)
-        {
-            var genericArguments = method.GenericArguments;
-            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
-            {
-                throw new EntryPointNotFoundException();
-            }
-
-            var tService = Helper.ITypeToService(genericArguments[0]);
-            var tConcrete = Helper.ITypeToClrType(genericArguments[0]);
-
-            return ILIntepreter.PushObject(esp, mStack, App.Bind(tService, tConcrete, true));
         }
 
         // public static TService Make<TService>(params object[] userParams)
