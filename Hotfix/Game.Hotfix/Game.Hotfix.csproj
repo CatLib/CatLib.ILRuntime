@@ -73,9 +73,12 @@
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
     <Compile Include="Providers\API\TestsHasBind\IHasBind.cs" />
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
+    <Compile Include="Providers\API\TestsInstance\IInstance.cs" />
     <Compile Include="Providers\API\TestsIsAlias\IIsAlias.cs" />
     <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
     <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
+    <Compile Include="Providers\API\TestsMake\IMake.cs" />
+    <Compile Include="Providers\API\TestsRelease\IRelease.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf1.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf2.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf3.cs" />
@@ -84,6 +87,8 @@
     <Compile Include="Providers\API\TestsSingleton\ISingleton1.cs" />
     <Compile Include="Providers\API\TestsSingleton\ISingleton3.cs" />
     <Compile Include="Providers\API\TestsSingleton\ISingleton4.cs" />
+    <Compile Include="Providers\API\TestsTag\ITag.cs" />
+    <Compile Include="Providers\API\TestsUnbind\IUnbind.cs" />
     <Compile Include="Providers\TestsAlias\Alias.cs" />
     <Compile Include="Providers\TestsAlias\ProviderAlias.cs" />
     <Compile Include="Providers\TestsBindIf\BindIf.cs" />
@@ -100,16 +105,26 @@
     <Compile Include="Providers\TestsHasBind\ProviderHasBind.cs" />
     <Compile Include="Providers\TestsHasInstance\HasInstance.cs" />
     <Compile Include="Providers\TestsHasInstance\ProviderHasInstance.cs" />
+    <Compile Include="Providers\TestsInstance\Instance.cs" />
+    <Compile Include="Providers\TestsInstance\ProviderInstance.cs" />
     <Compile Include="Providers\TestsIsAlias\IsAlias.cs" />
     <Compile Include="Providers\TestsIsAlias\ProviderIsAlias.cs" />
     <Compile Include="Providers\TestsIsResolved\IsResolved.cs" />
     <Compile Include="Providers\TestsIsResolved\ProviderIsResolved.cs" />
     <Compile Include="Providers\TestsIsStatic\IsStatic.cs" />
     <Compile Include="Providers\TestsIsStatic\ProviderIsStatic.cs" />
+    <Compile Include="Providers\TestsMake\Make.cs" />
+    <Compile Include="Providers\TestsMake\ProviderMake.cs" />
+    <Compile Include="Providers\TestsRelease\ProviderRelease.cs" />
+    <Compile Include="Providers\TestsRelease\Release.cs" />
     <Compile Include="Providers\TestsSingletonIf\ProviderSingletonIf.cs" />
     <Compile Include="Providers\TestsSingletonIf\SingletonIf.cs" />
     <Compile Include="Providers\TestsSingleton\ProviderSingleton.cs" />
     <Compile Include="Providers\TestsSingleton\Singleton.cs" />
+    <Compile Include="Providers\TestsTag\ProviderTag.cs" />
+    <Compile Include="Providers\TestsTag\Tag.cs" />
+    <Compile Include="Providers\TestsUnbind\ProviderUnbind.cs" />
+    <Compile Include="Providers\TestsUnbind\Unbind.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup />

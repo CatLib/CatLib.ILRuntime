@@ -18,11 +18,16 @@ using Game.Hotfix.TestsExtend;
 using Game.Hotfix.TestsGetBind;
 using Game.Hotfix.TestsHasBind;
 using Game.Hotfix.TestsHasInstance;
+using Game.Hotfix.TestsInstance;
 using Game.Hotfix.TestsIsAlias;
 using Game.Hotfix.TestsIsResolved;
 using Game.Hotfix.TestsIsStatic;
+using Game.Hotfix.TestsMake;
+using Game.Hotfix.TestsRelease;
 using Game.Hotfix.TestsSingleton;
 using Game.Hotfix.TestsSingletonIf;
+using Game.Hotfix.TestsTag;
+using Game.Hotfix.TestsUnbind;
 
 namespace Game.Hotfix
 {
@@ -48,7 +53,12 @@ namespace Game.Hotfix
             new ProviderBind(),
             new ProviderBindIf(), 
             new ProviderSingleton(), 
-            new ProviderSingletonIf()
+            new ProviderSingletonIf(),
+            new ProviderUnbind(),
+            new ProviderTag(), 
+            new ProviderInstance(),
+            new ProviderRelease(),
+            new ProviderMake(), 
         };
     }
 }

@@ -14,6 +14,7 @@ using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
 using System;
 using System.Collections.Generic;
+using ILRuntime.CLR.Utils;
 using ILRuntimeDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
 namespace CatLib.ILRuntime.Redirect
@@ -43,14 +44,17 @@ namespace CatLib.ILRuntime.Redirect
             mapping.Register("IsStatic", 1, 0, IsStatic_TService);
             mapping.Register("IsAlias", 1, 0, IsAlias_TService);
             mapping.Register("Alias", 2, 0, Alias_TAlias_TService);
+            mapping.Register("Unbind", 1, 0, Unbind_TService);
+            mapping.Register("Tag", 1, 1, Tag_TService_String);
+            mapping.Register("Instance", 1, 1, Instance_TService_Object);
+            mapping.Register("Release", 1, 0, Release_TService);
+            mapping.Register("Make", 1, 1, Make);
 
             RegisterExtend();
             RegisterBind();
             RegisterBindIf();
             RegisterSingleton();
             RegisterSingletonIf();
-
-            mapping.Register("Make", 1, 1, Make);
         }
 
         /// <summary>
@@ -193,6 +197,89 @@ namespace CatLib.ILRuntime.Redirect
             return ILIntepreter.PushObject(esp, mStack, App.Alias(tAlias, tService));
         }
 
+        // public static void Unbind<TService>()
+        private static StackObject* Unbind_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+            App.Unbind(tService);
+
+            return ILIntepreter.Minus(esp, 1);
+        }
+
+        // public static void Tag<TService>(string tag)
+        private static StackObject* Tag_TService_String(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 1)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var tag =
+                (string)typeof(string).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            App.Tag(tag, tService);
+
+            return ILIntepreter.Minus(esp, 1);
+        }
+
+        // public static void Instance<TService>(object instance)
+        private static StackObject* Instance_TService_Object(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 1)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var instance =
+                typeof(object).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            App.Instance(tService, instance);
+
+            return ILIntepreter.Minus(esp, 1);
+        }
+
+        // public static bool Release<TService>()
+        private static StackObject* Release_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tService = Helper.ITypeToService(genericArguments[0]);
+
+            return ILIntepreter.PushObject(esp, mStack, App.Release(tService));
+        }
+
         // public static TService Make<TService>(params object[] userParams)
         private static StackObject* Make(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
@@ -204,8 +291,17 @@ namespace CatLib.ILRuntime.Redirect
             }
 
             var tService = Helper.ITypeToService(genericArguments[0]);
-            return ILIntepreter.PushObject(esp, mStack, App.Make(tService));
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var userParams =
+                (object[])typeof(object[]).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            return ILIntepreter.PushObject(esp, mStack, App.Make(tService, userParams));
         }
     }
 }
-
