@@ -159,69 +159,63 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{typeof(System.Action<CatLib.IBindData, System.Object>)};
             method = type.GetMethod("OnRelease", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, OnRelease_46);
-            args = new Type[]{typeof(System.Func<System.String, System.Type>), typeof(System.Int32)};
-            method = type.GetMethod("OnFindType", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, OnFindType_47);
-            args = new Type[]{typeof(System.String), typeof(System.Action<System.Object>)};
-            method = type.GetMethod("OnRebound", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, OnRebound_48);
-            args = new Type[]{typeof(System.Action), typeof(System.Collections.Generic.KeyValuePair<System.String, System.Object>[])};
-            method = type.GetMethod("Flash", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Flash_49);
-            args = new Type[]{typeof(System.Type)};
-            method = type.GetMethod("Type2Service", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Type2Service_50);
-            args = new Type[]{typeof(System.String), typeof(System.Func<System.Object, System.Object>)};
-            method = type.GetMethod("Extend", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Extend_51);
-            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>)};
-            method = type.GetMethod("Bind", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Bind_52);
-            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>), typeof(CatLib.IBindData).MakeByRefType()};
-            method = type.GetMethod("BindIf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BindIf_53);
-            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>)};
-            method = type.GetMethod("Singleton", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Singleton_54);
-            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>), typeof(CatLib.IBindData).MakeByRefType()};
-            method = type.GetMethod("SingletonIf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SingletonIf_55);
-            args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.String)};
-            method = type.GetMethod("BindMethod", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BindMethod_56);
-            args = new Type[]{typeof(System.String), typeof(System.Func<System.Object>)};
-            method = type.GetMethod("BindMethod", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BindMethod_57);
-            args = new Type[]{typeof(System.Object[]).MakeByRefType(), typeof(System.Boolean)};
-            method = type.GetMethod("Release", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Release_58);
-            args = new Type[]{typeof(System.Object), typeof(System.String), typeof(System.Object[])};
-            method = type.GetMethod("Call", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Call_59);
-            args = new Type[]{typeof(System.Type), typeof(System.Object[])};
-            method = type.GetMethod("Make", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Make_60);
-            args = new Type[]{typeof(System.Action<System.Object>)};
-            method = type.GetMethod("OnRelease", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, OnRelease_61);
-            args = new Type[]{typeof(System.Action<System.Object>)};
-            method = type.GetMethod("OnResolving", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, OnResolving_62);
             args = new Type[]{typeof(System.Action<CatLib.IBindData, System.Object>)};
             method = type.GetMethod("OnAfterResolving", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, OnAfterResolving_63);
+            app.RegisterCLRMethodRedirection(method, OnAfterResolving_47);
+            args = new Type[]{typeof(System.Func<System.String, System.Type>), typeof(System.Int32)};
+            method = type.GetMethod("OnFindType", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, OnFindType_48);
+            args = new Type[]{typeof(System.String), typeof(System.Action<System.Object>)};
+            method = type.GetMethod("OnRebound", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, OnRebound_49);
+            args = new Type[]{typeof(System.Action), typeof(System.Collections.Generic.KeyValuePair<System.String, System.Object>[])};
+            method = type.GetMethod("Flash", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Flash_50);
+            args = new Type[]{typeof(System.Type)};
+            method = type.GetMethod("Type2Service", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Type2Service_51);
+            args = new Type[]{typeof(System.String), typeof(System.Func<System.Object, System.Object>)};
+            method = type.GetMethod("Extend", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Extend_52);
+            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>)};
+            method = type.GetMethod("Bind", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Bind_53);
+            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>), typeof(CatLib.IBindData).MakeByRefType()};
+            method = type.GetMethod("BindIf", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, BindIf_54);
+            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>)};
+            method = type.GetMethod("Singleton", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Singleton_55);
+            args = new Type[]{typeof(System.String), typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>), typeof(CatLib.IBindData).MakeByRefType()};
+            method = type.GetMethod("SingletonIf", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, SingletonIf_56);
+            args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.String)};
+            method = type.GetMethod("BindMethod", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, BindMethod_57);
+            args = new Type[]{typeof(System.String), typeof(System.Func<System.Object>)};
+            method = type.GetMethod("BindMethod", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, BindMethod_58);
+            args = new Type[]{typeof(System.Object[]).MakeByRefType(), typeof(System.Boolean)};
+            method = type.GetMethod("Release", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Release_59);
+            args = new Type[]{typeof(System.Object), typeof(System.String), typeof(System.Object[])};
+            method = type.GetMethod("Call", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Call_60);
+            args = new Type[]{typeof(System.Type), typeof(System.Object[])};
+            method = type.GetMethod("Make", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Make_61);
+            args = new Type[]{typeof(System.Action<System.Object>)};
+            method = type.GetMethod("OnRelease", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, OnRelease_62);
+            args = new Type[]{typeof(System.Action<System.Object>)};
+            method = type.GetMethod("OnResolving", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, OnResolving_63);
             args = new Type[]{typeof(System.Action<System.Object>)};
             method = type.GetMethod("OnAfterResolving", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, OnAfterResolving_64);
-            args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.Reflection.MethodInfo)};
-            method = type.GetMethod("Watch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Watch_65);
-            args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.String)};
-            method = type.GetMethod("Watch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Watch_66);
             args = new Type[]{typeof(System.Action), typeof(System.String), typeof(System.Object)};
             method = type.GetMethod("Flash", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Flash_67);
+            app.RegisterCLRMethodRedirection(method, Flash_65);
 
 
 
@@ -1302,7 +1296,28 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* OnFindType_47(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* OnAfterResolving_47(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            System.Action<CatLib.IBindData, System.Object> @closure = (System.Action<CatLib.IBindData, System.Object>)typeof(System.Action<CatLib.IBindData, System.Object>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+
+            var result_of_this_method = CatLib.App.OnAfterResolving(@closure);
+
+            object obj_result_of_this_method = result_of_this_method;
+            if(obj_result_of_this_method is CrossBindingAdaptorType)
+            {    
+                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+            }
+            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+        }
+
+        static StackObject* OnFindType_48(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1326,7 +1341,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* OnRebound_48(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* OnRebound_49(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1351,7 +1366,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* Flash_49(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Flash_50(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1371,7 +1386,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
-        static StackObject* Type2Service_50(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Type2Service_51(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1387,7 +1402,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* Extend_51(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Extend_52(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1407,7 +1422,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
-        static StackObject* Bind_52(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Bind_53(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1432,7 +1447,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* BindIf_53(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* BindIf_54(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1514,7 +1529,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
-        static StackObject* Singleton_54(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Singleton_55(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1539,7 +1554,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* SingletonIf_55(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* SingletonIf_56(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1621,7 +1636,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
-        static StackObject* BindMethod_56(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* BindMethod_57(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1650,7 +1665,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* BindMethod_57(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* BindMethod_58(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1675,7 +1690,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* Release_58(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Release_59(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1752,7 +1767,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
-        static StackObject* Call_59(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Call_60(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1781,7 +1796,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method, true);
         }
 
-        static StackObject* Make_60(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Make_61(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1806,7 +1821,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method, true);
         }
 
-        static StackObject* OnRelease_61(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* OnRelease_62(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1827,7 +1842,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* OnResolving_62(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* OnResolving_63(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -1839,27 +1854,6 @@ namespace ILRuntime.Runtime.Generated
 
 
             var result_of_this_method = CatLib.App.OnResolving(@callback);
-
-            object obj_result_of_this_method = result_of_this_method;
-            if(obj_result_of_this_method is CrossBindingAdaptorType)
-            {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
-            }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
-        }
-
-        static StackObject* OnAfterResolving_63(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Action<CatLib.IBindData, System.Object> @closure = (System.Action<CatLib.IBindData, System.Object>)typeof(System.Action<CatLib.IBindData, System.Object>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-
-            var result_of_this_method = CatLib.App.OnAfterResolving(@closure);
 
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
@@ -1890,55 +1884,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* Watch_65(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Reflection.MethodInfo @methodInfo = (System.Reflection.MethodInfo)typeof(System.Reflection.MethodInfo).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            System.Object @target = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
-            System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-
-            CatLib.App.Watch(@service, @target, @methodInfo);
-
-            return __ret;
-        }
-
-        static StackObject* Watch_66(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.String @method = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            System.Object @target = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
-            System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-
-            CatLib.App.Watch(@service, @target, @method);
-
-            return __ret;
-        }
-
-        static StackObject* Flash_67(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Flash_65(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;

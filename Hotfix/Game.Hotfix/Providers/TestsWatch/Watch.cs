@@ -9,11 +9,16 @@
  * Document: https://catlib.io/
  */
 
-using Game.Hotfix.API.TestsIsAlias;
+using Game.Hotfix.API.TestsWatch;
 
-namespace Game.Hotfix.TestsIsAlias
+namespace Game.Hotfix.TestsWatch
 {
-    public class IsAlias : IIsAlias, IIsAlias2
+    public class Watch : IWatch
     {
+        public bool isOk = false;
+        public void WatchOk()
+        {
+            isOk = true;
+        }
     }
 }

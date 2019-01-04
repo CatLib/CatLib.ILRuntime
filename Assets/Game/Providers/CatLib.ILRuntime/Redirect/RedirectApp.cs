@@ -51,6 +51,7 @@ namespace CatLib.ILRuntime.Redirect
             mapping.Register("Release", 1, 0, Release_TService);
             mapping.Register("Make", 1, 1, Make_TService_ArrObject);
             mapping.Register("Factory", 1, 1, Factory_TService_ArrObject);
+            mapping.Register("Type2Service", 1, 0, Type2Service_TService);
 
             RegisterExtend();
             RegisterBind();
@@ -59,6 +60,8 @@ namespace CatLib.ILRuntime.Redirect
             RegisterSingletonIf();
             RegisterOnRelease();
             RegisterOnResolving();
+            RegisterOnAfterResolving();
+            RegisterWatch();
         }
 
         /// <summary>
@@ -341,6 +344,21 @@ namespace CatLib.ILRuntime.Redirect
             }
 
             return ILIntepreter.PushObject(esp, mStack, result);
+        }
+
+        // public static bool Type2Service<TService>()
+        private static StackObject* Type2Service_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 0)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tType = Helper.ITypeToClrType(genericArguments[0]);
+
+            return ILIntepreter.PushObject(esp, mStack, App.Type2Service(tType));
         }
     }
 }

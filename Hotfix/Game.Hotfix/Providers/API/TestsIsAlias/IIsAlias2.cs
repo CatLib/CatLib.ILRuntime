@@ -9,11 +9,9 @@
  * Document: https://catlib.io/
  */
 
-using Game.Hotfix.API.TestsIsAlias;
-
-namespace Game.Hotfix.TestsIsAlias
+namespace Game.Hotfix.API.TestsIsAlias
 {
-    public class IsAlias : IIsAlias, IIsAlias2
+    public interface IIsAlias2
     {
     }
 }

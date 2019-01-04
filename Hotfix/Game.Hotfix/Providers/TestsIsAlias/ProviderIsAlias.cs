@@ -28,15 +28,15 @@ namespace Game.Hotfix.TestsIsAlias
                 return;
             }
 
-            if (IsAlias<IDisposable>())
+            if (IsAlias<IIsAlias2>())
             {
                 Util.Faild("IsAlias_3");
                 return;
             }
 
-            GetBind<IIsAlias>().Alias<IDisposable>();
+            GetBind<IIsAlias>().Alias<IIsAlias2>();
 
-            if (!IsAlias<IDisposable>())
+            if (!IsAlias<IIsAlias2>())
             {
                 Util.Faild("IsAlias_4");
                 return;

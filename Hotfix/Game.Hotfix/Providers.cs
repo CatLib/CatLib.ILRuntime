@@ -24,12 +24,16 @@ using Game.Hotfix.TestsIsAlias;
 using Game.Hotfix.TestsIsResolved;
 using Game.Hotfix.TestsIsStatic;
 using Game.Hotfix.TestsMake;
+using Game.Hotfix.TestsOnAfterResolving;
 using Game.Hotfix.TestsOnRelease;
+using Game.Hotfix.TestsOnResolving;
 using Game.Hotfix.TestsRelease;
 using Game.Hotfix.TestsSingleton;
 using Game.Hotfix.TestsSingletonIf;
 using Game.Hotfix.TestsTag;
 using Game.Hotfix.TestsUnbind;
+using Game.Hotfix.TestsWatch;
+using Game.Hotfix.Type2Service;
 
 namespace Game.Hotfix
 {
@@ -63,6 +67,10 @@ namespace Game.Hotfix
             new ProviderMake(), 
             new ProviderFactory(),
             new ProviderOnRelease(), 
+            new ProviderOnResolving(), 
+            new ProviderOnAfterResolving(), 
+            new ProviderWatch(),
+            new ProviderTypeToService(), 
         };
     }
 }

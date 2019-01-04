@@ -77,11 +77,16 @@
     <Compile Include="Providers\API\TestsHasInstance\IHasInstance.cs" />
     <Compile Include="Providers\API\TestsInstance\IInstance.cs" />
     <Compile Include="Providers\API\TestsIsAlias\IIsAlias.cs" />
+    <Compile Include="Providers\API\TestsIsAlias\IIsAlias2.cs" />
     <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
     <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
     <Compile Include="Providers\API\TestsMake\IMake.cs" />
+    <Compile Include="Providers\API\TestsOnAfterResolving\IOnAfterResolving1.cs" />
+    <Compile Include="Providers\API\TestsOnAfterResolving\IOnAfterResolving2.cs" />
     <Compile Include="Providers\API\TestsOnRelease\IOnRelease1.cs" />
     <Compile Include="Providers\API\TestsOnRelease\IOnRelease2.cs" />
+    <Compile Include="Providers\API\TestsOnResolving\IOnResolving1.cs" />
+    <Compile Include="Providers\API\TestsOnResolving\IOnResolving2.cs" />
     <Compile Include="Providers\API\TestsRelease\IRelease.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf1.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf2.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Providers\API\TestsSingleton\ISingleton4.cs" />
     <Compile Include="Providers\API\TestsTag\ITag.cs" />
     <Compile Include="Providers\API\TestsUnbind\IUnbind.cs" />
+    <Compile Include="Providers\API\TestsWatch\IWatch.cs" />
     <Compile Include="Providers\TestsAlias\Alias.cs" />
     <Compile Include="Providers\TestsAlias\ProviderAlias.cs" />
     <Compile Include="Providers\TestsBindIf\BindIf.cs" />
@@ -121,8 +127,12 @@
     <Compile Include="Providers\TestsIsStatic\ProviderIsStatic.cs" />
     <Compile Include="Providers\TestsMake\Make.cs" />
     <Compile Include="Providers\TestsMake\ProviderMake.cs" />
+    <Compile Include="Providers\TestsOnAfterResolving\OnAfterResolving.cs" />
+    <Compile Include="Providers\TestsOnAfterResolving\ProviderOnAfterResolving.cs" />
     <Compile Include="Providers\TestsOnRelease\OnRelease.cs" />
     <Compile Include="Providers\TestsOnRelease\ProviderOnRelease.cs" />
+    <Compile Include="Providers\TestsOnResolving\OnResolving.cs" />
+    <Compile Include="Providers\TestsOnResolving\ProviderOnResolving.cs" />
     <Compile Include="Providers\TestsRelease\ProviderRelease.cs" />
     <Compile Include="Providers\TestsRelease\Release.cs" />
     <Compile Include="Providers\TestsSingletonIf\ProviderSingletonIf.cs" />
@@ -133,6 +143,9 @@
     <Compile Include="Providers\TestsTag\Tag.cs" />
     <Compile Include="Providers\TestsUnbind\ProviderUnbind.cs" />
     <Compile Include="Providers\TestsUnbind\Unbind.cs" />
+    <Compile Include="Providers\TestsWatch\ProviderWatch.cs" />
+    <Compile Include="Providers\TestsWatch\Watch.cs" />
+    <Compile Include="Providers\Type2Service\ProviderTypeToService.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup />

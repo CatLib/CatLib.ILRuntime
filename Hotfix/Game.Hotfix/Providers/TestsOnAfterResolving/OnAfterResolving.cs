@@ -9,11 +9,11 @@
  * Document: https://catlib.io/
  */
 
-using Game.Hotfix.API.TestsIsAlias;
+using Game.Hotfix.API.TestsOnAfterResolving;
 
-namespace Game.Hotfix.TestsIsAlias
+namespace Game.Hotfix.TestsOnAfterResolving
 {
-    public class IsAlias : IIsAlias, IIsAlias2
+    public class OnAfterResolving : IOnAfterResolving1, IOnAfterResolving2
     {
     }
 }

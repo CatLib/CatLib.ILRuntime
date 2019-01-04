@@ -453,6 +453,13 @@
             </summary>
             <param name="action">处理释放时的回调</param>
         </member>
+        <member name="M:CatLib.App.OnAfterResolving(System.Action{CatLib.IBindData,System.Object})">
+            <summary>
+            当服务被解决事件之后的回调
+            </summary>
+            <param name="closure">闭包</param>
+            <returns>当前容器</returns>
+        </member>
         <member name="M:CatLib.App.OnFindType(System.Func{System.String,System.Type},System.Int32)">
             <summary>
             当查找类型无法找到时会尝试去调用开发者提供的查找类型函数
@@ -991,13 +998,6 @@
             <param name="closure">回调函数</param>
             <returns>当前容器对象</returns>
         </member>
-        <member name="M:CatLib.App.OnAfterResolving(System.Action{CatLib.IBindData,System.Object})">
-            <summary>
-            当服务被解决事件之后的回调
-            </summary>
-            <param name="closure">闭包</param>
-            <returns>当前容器</returns>
-        </member>
         <member name="M:CatLib.App.OnAfterResolving(System.Action{System.Object})">
             <summary>
             当服务被解决事件之后的回调
@@ -1020,34 +1020,6 @@
             <typeparam name="TWhere">筛选条件</typeparam>
             <param name="closure">闭包</param>
             <returns>当前容器</returns>
-        </member>
-        <member name="M:CatLib.App.Watch(System.String,System.Object,System.Reflection.MethodInfo)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <para>调用是以依赖注入的形式进行的</para>
-            <para>服务的新建（第一次解决服务）操作并不会触发重定义</para>
-            </summary>
-            <param name="service">关注的服务名</param>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="methodInfo">方法信息</param>
-        </member>
-        <member name="M:CatLib.App.Watch(System.String,System.Object,System.String)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <param>调用是以依赖注入的形式进行的</param>
-            </summary>
-            <param name="service">关注的服务名</param>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="method">方法名</param>
-        </member>
-        <member name="M:CatLib.App.Watch``1(System.Object,System.String)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <param>调用是以依赖注入的形式进行的</param>
-            </summary>
-            <typeparam name="TService">服务名</typeparam>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="method">方法名</param>
         </member>
         <member name="M:CatLib.App.Watch``1(System.Action)">
             <summary>
@@ -2125,6 +2097,14 @@
             <param name="bindData">绑定数据</param>
             <returns>服务绑定数据</returns>
         </member>
+        <member name="M:CatLib.ExtendBindData.OnResolving(CatLib.IBindData,System.Action)">
+            <summary>
+            解决服务时触发的回调
+            </summary>
+            <param name="bindData">绑定数据</param>
+            <param name="action">解决事件</param>
+            <returns>服务绑定数据</returns>
+        </member>
         <member name="M:CatLib.ExtendBindData.OnResolving(CatLib.IBindData,System.Action{System.Object})">
             <summary>
             解决服务时触发的回调
@@ -2151,9 +2131,9 @@
             <param name="closure">闭包</param>
             <returns>服务绑定数据</returns>
         </member>
-        <member name="M:CatLib.ExtendBindData.OnResolving(CatLib.IBindData,System.Action)">
+        <member name="M:CatLib.ExtendBindData.OnAfterResolving(CatLib.IBindData,System.Action)">
             <summary>
-            解决服务时触发的回调
+            解决服务事件之后的回调
             </summary>
             <param name="bindData">绑定数据</param>
             <param name="action">解决事件</param>
@@ -2183,12 +2163,12 @@
             <param name="closure">解决事件</param>
             <returns>服务绑定数据</returns>
         </member>
-        <member name="M:CatLib.ExtendBindData.OnAfterResolving(CatLib.IBindData,System.Action)">
+        <member name="M:CatLib.ExtendBindData.OnRelease(CatLib.IBindData,System.Action)">
             <summary>
-            解决服务事件之后的回调
+            当静态服务被释放时
             </summary>
             <param name="bindData">绑定数据</param>
-            <param name="action">解决事件</param>
+            <param name="action">处理事件</param>
             <returns>服务绑定数据</returns>
         </member>
         <member name="M:CatLib.ExtendBindData.OnRelease(CatLib.IBindData,System.Action{System.Object})">
@@ -2213,14 +2193,6 @@
             </summary>
             <param name="bindData">绑定数据</param>
             <param name="closure">处理事件</param>
-            <returns>服务绑定数据</returns>
-        </member>
-        <member name="M:CatLib.ExtendBindData.OnRelease(CatLib.IBindData,System.Action)">
-            <summary>
-            当静态服务被释放时
-            </summary>
-            <param name="bindData">绑定数据</param>
-            <param name="action">处理事件</param>
             <returns>服务绑定数据</returns>
         </member>
         <member name="T:CatLib.IBindable">
@@ -4321,37 +4293,6 @@
             <param name="container">服务容器</param>
             <param name="closure">闭包</param>
             <returns>当前容器对象</returns>
-        </member>
-        <member name="M:CatLib.ExtendContainer.Watch(CatLib.IContainer,System.String,System.Object,System.Reflection.MethodInfo)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <para>调用是以依赖注入的形式进行的</para>
-            <para>服务的新建（第一次解决服务）操作并不会触发重定义</para>
-            </summary>
-            <param name="container">服务容器</param>
-            <param name="service">关注的服务名</param>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="methodInfo">方法信息</param>
-        </member>
-        <member name="M:CatLib.ExtendContainer.Watch(CatLib.IContainer,System.String,System.Object,System.String)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <param>调用是以依赖注入的形式进行的</param>
-            </summary>
-            <param name="container">服务容器</param>
-            <param name="service">关注的服务名</param>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="method">方法名</param>
-        </member>
-        <member name="M:CatLib.ExtendContainer.Watch``1(CatLib.IContainer,System.Object,System.String)">
-            <summary>
-            关注指定的服务，当服务触发重定义时调用指定对象的指定方法
-            <param>调用是以依赖注入的形式进行的</param>
-            </summary>
-            <typeparam name="TService">服务名</typeparam>
-            <param name="container">服务容器</param>
-            <param name="target">当服务发生重定义时调用的目标</param>
-            <param name="method">方法名</param>
         </member>
         <member name="M:CatLib.ExtendContainer.Watch``1(CatLib.IContainer,System.Action)">
             <summary>
