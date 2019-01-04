@@ -70,6 +70,7 @@
     <Compile Include="Providers\API\TestsBind\IBind4.cs" />
     <Compile Include="Providers\API\TestsCanMake\ICanMake.cs" />
     <Compile Include="Providers\API\TestsExtend\IExtend.cs" />
+    <Compile Include="Providers\API\TestsExtend\IExtend2.cs" />
     <Compile Include="Providers\API\TestsFactory\IFactory.cs" />
     <Compile Include="Providers\API\TestsGetBind\IGetBind.cs" />
     <Compile Include="Providers\API\TestsHasBind\IHasBind.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Providers\API\TestsIsResolved\IIsResolved.cs" />
     <Compile Include="Providers\API\TestsIsStatic\IIsStatic.cs" />
     <Compile Include="Providers\API\TestsMake\IMake.cs" />
+    <Compile Include="Providers\API\TestsOnRelease\IOnRelease1.cs" />
+    <Compile Include="Providers\API\TestsOnRelease\IOnRelease2.cs" />
     <Compile Include="Providers\API\TestsRelease\IRelease.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf1.cs" />
     <Compile Include="Providers\API\TestsSingletonIf\ISingletonIf2.cs" />
@@ -118,6 +121,8 @@
     <Compile Include="Providers\TestsIsStatic\ProviderIsStatic.cs" />
     <Compile Include="Providers\TestsMake\Make.cs" />
     <Compile Include="Providers\TestsMake\ProviderMake.cs" />
+    <Compile Include="Providers\TestsOnRelease\OnRelease.cs" />
+    <Compile Include="Providers\TestsOnRelease\ProviderOnRelease.cs" />
     <Compile Include="Providers\TestsRelease\ProviderRelease.cs" />
     <Compile Include="Providers\TestsRelease\Release.cs" />
     <Compile Include="Providers\TestsSingletonIf\ProviderSingletonIf.cs" />

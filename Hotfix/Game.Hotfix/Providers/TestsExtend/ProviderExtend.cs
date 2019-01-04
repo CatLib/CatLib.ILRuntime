@@ -29,6 +29,13 @@ namespace Game.Hotfix.TestsExtend
                 return;
             }
 
+            var extend2 = Make<IExtend2>();
+            if (extend2.Name2 != "hello")
+            {
+                Util.Faild("Extend_2");
+                return;
+            }
+
             Util.Success("Extend"); 
         }
 
@@ -41,16 +48,23 @@ namespace Game.Hotfix.TestsExtend
         public override void Register()
         {
             Singleton<IExtend, Extend>();
-
-            // TODO: Extend<IExtend, IExtend>((instance, c)
-            // TODO: Extend<TConcrete>(Func<TConcrete, IContainer, object> closure)
-            // TODO: Extend<TConcrete>(Func<TConcrete, object> closure)
+            Singleton<IExtend2, Extend>();
 
             Extend<IExtend, IExtend>((instance) =>
             {
                 instance.Name = "Extend";
                 return instance;
             });
+
+            Extend<IExtend, IExtend>((instance, c) => instance);
+
+            Extend<IExtend2>((instance) =>
+            {
+                instance.Name2 = "hello";
+                return instance;
+            });
+
+            Extend<IExtend2>((instance, c) => instance);
         }
     }
 }

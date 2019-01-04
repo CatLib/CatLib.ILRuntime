@@ -51,7 +51,7 @@ namespace Game.Hotfix.TestsSingletonIf
                 return;
             }
 
-            if (Make("abc") == null)
+            if (Make("abc-singletonif") == null)
             {
                 Util.Faild("SingletonIf_11");
                 return;
@@ -94,7 +94,7 @@ namespace Game.Hotfix.TestsSingletonIf
                 Util.Faild("SingletonIf_5");
             }
 
-            if (!SingletonIf("abc", (c, p) => new SingletonIf(), out bindData) || bindData == null)
+            if (!SingletonIf("abc-singletonif", (c, p) => new SingletonIf(), out bindData) || bindData == null)
             {
                 Util.Faild("SingletonIf_6");
             }

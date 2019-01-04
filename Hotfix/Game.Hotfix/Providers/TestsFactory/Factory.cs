@@ -15,5 +15,6 @@ namespace Game.Hotfix.TestsFactory
 {
     public class Factory : IFactory
     {
+        public string Name { get; set; } = "hello world";
     }
 }

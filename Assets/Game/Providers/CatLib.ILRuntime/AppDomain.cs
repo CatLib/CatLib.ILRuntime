@@ -193,7 +193,6 @@ namespace CatLib.ILRuntime
             RegisterFuncDelegate<ILTypeInstance, IContainer, object>();
             // Func<ILTypeInstance, Object>
             RegisterFuncDelegate<ILTypeInstance, object>();
-
             #endregion
 
             #region Action
@@ -203,6 +202,10 @@ namespace CatLib.ILRuntime
             RegisterActionDelegate<IBindData, object>();
             // Action<object>
             RegisterActionDelegate<object>();
+            // Action<ILTypeInstance>
+            RegisterActionDelegate<ILTypeInstance>();
+            // Action<IBindData, ILTypeInstance>
+            RegisterActionDelegate<IBindData, ILTypeInstance>();
             #endregion
         }
     }

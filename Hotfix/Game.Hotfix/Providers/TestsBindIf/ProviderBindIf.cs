@@ -51,7 +51,7 @@ namespace Game.Hotfix.TestsBindIf
                 return;
             }
 
-            if (Make("abc") == null)
+            if (Make("abc-bindif") == null)
             {
                 Util.Faild("BindIf_11");
                 return;
@@ -94,7 +94,7 @@ namespace Game.Hotfix.TestsBindIf
                 Util.Faild("BindIf_5");
             }
 
-            if (!BindIf("abc", (c, p) => new BindIf(), out bindData) || bindData == null)
+            if (!BindIf("abc-bindif", (c, p) => new BindIf(), out bindData) || bindData == null)
             {
                 Util.Faild("BindIf_6");
             }

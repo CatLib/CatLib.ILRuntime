@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -9,7 +8,7 @@ using ILRuntime.CLR.Method;
 using ILRuntime.Other;
 using Mono.Cecil;
 using ILRuntime.Runtime.Intepreter;
-using UnityEngine.Experimental.Playables;
+using System.Reflection;
 
 namespace ILRuntime.CLR.Utils
 {
@@ -79,6 +78,8 @@ namespace ILRuntime.CLR.Utils
                         }
                         if (t == null)
                             t = appdomain.GetType(name);
+                        if (t != null && i.ParameterType.IsByReference)
+                            t = t.MakeByRefType();
                     }
 
                     param.Add(t);
@@ -244,13 +245,7 @@ namespace ILRuntime.CLR.Utils
                     return obj;
                 if (pt == typeof(Delegate))
                     return ((IDelegateAdapter)obj).Delegate;
-
-                if (obj is IDelegateAdapter)
-                {
-                    return ((IDelegateAdapter)obj).Delegate;
-                }
-
-                return ((IDelegateAdapter)obj).GetConvertor(pt); 
+                return ((IDelegateAdapter)obj).GetConvertor(pt);
             }
             else if ((typeFlags & TypeFlags.IsByRef) != 0)
             {
@@ -278,6 +273,34 @@ namespace ILRuntime.CLR.Utils
                 }
             }
             return obj;
+        }
+
+        public static bool CheckMethodParams(this MethodInfo m, Type[] args)
+        {
+            var arr = m.GetParameters();
+            if (arr.Length != args.Length) return false;
+            for (var i = 0; i < args.Length; i++)
+            {
+                var t1 = arr[i].ParameterType;
+                var t2 = args[i];
+                if (t1 != t2 || t1.IsByRef != t2.IsByRef)
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool CheckMethodParams(this MethodInfo m, ParameterInfo[] args)
+        {
+            var arr = m.GetParameters();
+            if (arr.Length != args.Length) return false;
+            for (var i = 0; i < args.Length; i++)
+            {
+                var t1 = arr[i].ParameterType;
+                var t2 = args[i].ParameterType;
+                if (t1 != t2 || t1.IsByRef != t2.IsByRef)
+                    return false;
+            }
+            return true;
         }
     }
 }

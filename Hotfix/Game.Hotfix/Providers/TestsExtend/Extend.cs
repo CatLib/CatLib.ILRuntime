@@ -13,8 +13,10 @@ using Game.Hotfix.API.TestsExtend;
 
 namespace Game.Hotfix.TestsExtend
 {
-    public class Extend : IExtend
+    public class Extend : IExtend, IExtend2
     {
         public string Name { get; set; }
+
+        public string Name2 { get; set; }
     }
 }

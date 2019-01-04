@@ -14,6 +14,7 @@ using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
 using System;
 using System.Collections.Generic;
+using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Utils;
 using ILRuntimeDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
@@ -56,6 +57,8 @@ namespace CatLib.ILRuntime.Redirect
             RegisterBindIf();
             RegisterSingleton();
             RegisterSingletonIf();
+            RegisterOnRelease();
+            RegisterOnResolving();
         }
 
         /// <summary>
@@ -326,7 +329,18 @@ namespace CatLib.ILRuntime.Redirect
 
             intp.Free(ptrOfThisMethod);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Factory(tService, userParams));
+            object result;
+            if (genericArguments[0] is ILType)
+            {
+                Func<ILTypeInstance> func = () => (ILTypeInstance) App.Make(tService, userParams);
+                result = func;
+            }
+            else
+            {
+                throw new NotSupportedException("Only use the factory to hotfix services.");
+            }
+
+            return ILIntepreter.PushObject(esp, mStack, result);
         }
     }
 }

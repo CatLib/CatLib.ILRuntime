@@ -9,10 +9,10 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsFactory
+namespace Game.Hotfix.API.TestsExtend
 {
-    public interface IFactory
+    public interface IExtend2
     {
-        string Name { get; set; }
+        string Name2 { get; set; }
     }
 }

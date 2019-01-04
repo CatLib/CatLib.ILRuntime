@@ -22,13 +22,18 @@ namespace Game.Hotfix.TestsFactory
         {
             Util.Log("Init() : ProviderFactory");
 
-            var factory = App.Factory<IFactory>();
-
+            var factory = Factory<IFactory>();
             var instance = factory();
 
             if (instance == null)
             {
                 Util.Faild("Factory_1");
+                return;
+            }
+
+            if (instance.Name != "hello world")
+            {
+                Util.Faild("Factory_2");
                 return;
             }
 

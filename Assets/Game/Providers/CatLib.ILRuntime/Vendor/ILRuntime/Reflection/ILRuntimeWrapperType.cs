@@ -189,12 +189,7 @@ namespace ILRuntime.Reflection
             }
 
             var instance = o as ILTypeInstance;
-            if (instance != null)
-            {
-                return IsAssignableFrom(instance.Type.ReflectionType);
-            }
-
-            return o != null && IsAssignableFrom(o.GetType());
+            return IsAssignableFrom(instance != null ? instance.Type.ReflectionType : o.GetType());
         }
 
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
@@ -237,6 +232,26 @@ namespace ILRuntime.Reflection
             return et.IsCOMObject;
         }
 
+        public override bool IsGenericType
+        {
+            get { return et.IsGenericType; }
+        }
+
+        public override bool IsGenericTypeDefinition
+        {
+            get
+            {
+                return et.IsGenericTypeDefinition;
+            }
+        }
+
+        public override bool IsGenericParameter
+        {
+            get
+            {
+                return et.IsGenericParameter;
+            }
+        }
         public override Type GetElementType()
         {
             return et.GetElementType();

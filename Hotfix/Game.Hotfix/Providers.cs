@@ -24,6 +24,7 @@ using Game.Hotfix.TestsIsAlias;
 using Game.Hotfix.TestsIsResolved;
 using Game.Hotfix.TestsIsStatic;
 using Game.Hotfix.TestsMake;
+using Game.Hotfix.TestsOnRelease;
 using Game.Hotfix.TestsRelease;
 using Game.Hotfix.TestsSingleton;
 using Game.Hotfix.TestsSingletonIf;
@@ -61,6 +62,7 @@ namespace Game.Hotfix
             new ProviderRelease(),
             new ProviderMake(), 
             new ProviderFactory(),
+            new ProviderOnRelease(), 
         };
     }
 }

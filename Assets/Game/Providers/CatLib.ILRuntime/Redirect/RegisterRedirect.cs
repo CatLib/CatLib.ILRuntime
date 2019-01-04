@@ -9,6 +9,7 @@
  * Document: https://catlib.io/
  */
 
+using ILRuntime.Runtime.Generated;
 using ILRuntimeDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
 namespace CatLib.ILRuntime.Redirect
@@ -31,6 +32,9 @@ namespace CatLib.ILRuntime.Redirect
             RedirectBindable_IMethodBind.Register(appDomain);
             RedirectGivenData_IBindData.Register(appDomain);
             RedirectGivenData_IMethodBind.Register(appDomain);
+
+            // Generated
+            CatLib_App_Binding.Register(appDomain);
         }
     }
 }

@@ -9,10 +9,11 @@
  * Document: https://catlib.io/
  */
 
-namespace Game.Hotfix.API.TestsFactory
+using Game.Hotfix.API.TestsOnRelease;
+
+namespace Game.Hotfix.TestsOnRelease
 {
-    public interface IFactory
+    public class OnRelease : IOnRelease1, IOnRelease2
     {
-        string Name { get; set; }
     }
 }

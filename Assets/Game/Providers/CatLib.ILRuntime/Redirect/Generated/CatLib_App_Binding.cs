@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.InteropServices;
-
-using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
+using ILRuntime.CLR.TypeSystem;
+using ILRuntime.CLR.Utils;
 using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
-using ILRuntime.Reflection;
-using ILRuntime.CLR.Utils;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace ILRuntime.Runtime.Generated
 {
@@ -147,7 +144,7 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{typeof(System.String), typeof(System.Object[])};
             method = type.GetMethod("Make", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, Make_41);
-            args = new Type[]{typeof(System.String)};
+            args = new Type[]{typeof(System.String), typeof(System.Object[])};
             method = type.GetMethod("Factory", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, Factory_42);
             args = new Type[]{typeof(System.String), typeof(System.String)};
@@ -812,19 +809,16 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 4);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack));
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Boolean @isStatic = ptr_of_this_method->Value == 1;
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             System.Func<CatLib.IContainer, System.Object[], System.Object> @concrete = (System.Func<CatLib.IContainer, System.Object[], System.Object>)typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 4);
             System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
 
             var result_of_this_method = CatLib.App.BindIf(@service, @concrete, @isStatic, out @bindData);
@@ -835,7 +829,7 @@ namespace ILRuntime.Runtime.Generated
                 case ObjectTypes.StackObjectReference:
                     {
                         var ___dst = *(StackObject**)&ptr_of_this_method->Value;
-                        object ___obj = bindData;
+                        object ___obj = @bindData;
                         if (___dst->ObjectType >= ObjectTypes.Object)
                         {
                             if (___obj is CrossBindingAdaptorType)
@@ -853,12 +847,12 @@ namespace ILRuntime.Runtime.Generated
                         var ___obj = __mStack[ptr_of_this_method->Value];
                         if(___obj is ILTypeInstance)
                         {
-                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
                             var ___type = __domain.GetType(___obj.GetType()) as CLRType;
-                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, bindData);
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @bindData);
                         }
                     }
                     break;
@@ -867,22 +861,29 @@ namespace ILRuntime.Runtime.Generated
                         var ___type = __domain.GetType(ptr_of_this_method->Value);
                         if(___type is ILType)
                         {
-                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
-                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, bindData);
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @bindData);
                         }
                     }
                     break;
                  case ObjectTypes.ArrayReference:
                     {
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as CatLib.IBindData[];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = bindData;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @bindData;
                     }
                     break;
             }
 
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 4);
+            __intp.Free(ptr_of_this_method);
             __ret->ObjectType = ObjectTypes.Integer;
             __ret->Value = result_of_this_method ? 1 : 0;
             return __ret + 1;
@@ -895,19 +896,16 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 4);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack));
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Boolean @isStatic = ptr_of_this_method->Value == 1;
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             System.Type @concrete = (System.Type)typeof(System.Type).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 4);
             System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
 
             var result_of_this_method = CatLib.App.BindIf(@service, @concrete, @isStatic, out @bindData);
@@ -918,7 +916,7 @@ namespace ILRuntime.Runtime.Generated
                 case ObjectTypes.StackObjectReference:
                     {
                         var ___dst = *(StackObject**)&ptr_of_this_method->Value;
-                        object ___obj = bindData;
+                        object ___obj = @bindData;
                         if (___dst->ObjectType >= ObjectTypes.Object)
                         {
                             if (___obj is CrossBindingAdaptorType)
@@ -936,12 +934,12 @@ namespace ILRuntime.Runtime.Generated
                         var ___obj = __mStack[ptr_of_this_method->Value];
                         if(___obj is ILTypeInstance)
                         {
-                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
                             var ___type = __domain.GetType(___obj.GetType()) as CLRType;
-                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, bindData);
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @bindData);
                         }
                     }
                     break;
@@ -950,22 +948,29 @@ namespace ILRuntime.Runtime.Generated
                         var ___type = __domain.GetType(ptr_of_this_method->Value);
                         if(___type is ILType)
                         {
-                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
-                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, bindData);
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @bindData);
                         }
                     }
                     break;
                  case ObjectTypes.ArrayReference:
                     {
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as CatLib.IBindData[];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = bindData;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @bindData;
                     }
                     break;
             }
 
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 4);
+            __intp.Free(ptr_of_this_method);
             __ret->ObjectType = ObjectTypes.Integer;
             __ret->Value = result_of_this_method ? 1 : 0;
             return __ret + 1;
@@ -1194,14 +1199,18 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            System.Object[] @userParams = (System.Object[])typeof(System.Object[]).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             __intp.Free(ptr_of_this_method);
 
 
-            var result_of_this_method = CatLib.App.Factory(@service);
+            var result_of_this_method = CatLib.App.Factory(@service, @userParams);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -1430,16 +1439,13 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 3);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack));
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Func<CatLib.IContainer, System.Object[], System.Object> @concrete = (System.Func<CatLib.IContainer, System.Object[], System.Object>)typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
 
             var result_of_this_method = CatLib.App.BindIf(@service, @concrete, out @bindData);
@@ -1450,7 +1456,7 @@ namespace ILRuntime.Runtime.Generated
                 case ObjectTypes.StackObjectReference:
                     {
                         var ___dst = *(StackObject**)&ptr_of_this_method->Value;
-                        object ___obj = bindData;
+                        object ___obj = @bindData;
                         if (___dst->ObjectType >= ObjectTypes.Object)
                         {
                             if (___obj is CrossBindingAdaptorType)
@@ -1468,12 +1474,12 @@ namespace ILRuntime.Runtime.Generated
                         var ___obj = __mStack[ptr_of_this_method->Value];
                         if(___obj is ILTypeInstance)
                         {
-                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
                             var ___type = __domain.GetType(___obj.GetType()) as CLRType;
-                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, bindData);
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @bindData);
                         }
                     }
                     break;
@@ -1482,22 +1488,27 @@ namespace ILRuntime.Runtime.Generated
                         var ___type = __domain.GetType(ptr_of_this_method->Value);
                         if(___type is ILType)
                         {
-                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
-                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, bindData);
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @bindData);
                         }
                     }
                     break;
                  case ObjectTypes.ArrayReference:
                     {
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as CatLib.IBindData[];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = bindData;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @bindData;
                     }
                     break;
             }
 
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            __intp.Free(ptr_of_this_method);
             __ret->ObjectType = ObjectTypes.Integer;
             __ret->Value = result_of_this_method ? 1 : 0;
             return __ret + 1;
@@ -1535,16 +1546,13 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 3);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            CatLib.IBindData @bindData = (CatLib.IBindData)typeof(CatLib.IBindData).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack));
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Func<CatLib.IContainer, System.Object[], System.Object> @concrete = (System.Func<CatLib.IContainer, System.Object[], System.Object>)typeof(System.Func<CatLib.IContainer, System.Object[], System.Object>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             System.String @service = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
 
 
             var result_of_this_method = CatLib.App.SingletonIf(@service, @concrete, out @bindData);
@@ -1555,7 +1563,7 @@ namespace ILRuntime.Runtime.Generated
                 case ObjectTypes.StackObjectReference:
                     {
                         var ___dst = *(StackObject**)&ptr_of_this_method->Value;
-                        object ___obj = bindData;
+                        object ___obj = @bindData;
                         if (___dst->ObjectType >= ObjectTypes.Object)
                         {
                             if (___obj is CrossBindingAdaptorType)
@@ -1573,12 +1581,12 @@ namespace ILRuntime.Runtime.Generated
                         var ___obj = __mStack[ptr_of_this_method->Value];
                         if(___obj is ILTypeInstance)
                         {
-                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
                             var ___type = __domain.GetType(___obj.GetType()) as CLRType;
-                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, bindData);
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @bindData);
                         }
                     }
                     break;
@@ -1587,22 +1595,27 @@ namespace ILRuntime.Runtime.Generated
                         var ___type = __domain.GetType(ptr_of_this_method->Value);
                         if(___type is ILType)
                         {
-                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = bindData;
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @bindData;
                         }
                         else
                         {
-                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, bindData);
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @bindData);
                         }
                     }
                     break;
                  case ObjectTypes.ArrayReference:
                     {
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as CatLib.IBindData[];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = bindData;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @bindData;
                     }
                     break;
             }
 
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            __intp.Free(ptr_of_this_method);
             __ret->ObjectType = ObjectTypes.Integer;
             __ret->Value = result_of_this_method ? 1 : 0;
             return __ret + 1;
@@ -1672,19 +1685,20 @@ namespace ILRuntime.Runtime.Generated
             System.Boolean @reverse = ptr_of_this_method->Value == 1;
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            System.Object[] @instances = (System.Object[])typeof(System.Object[]).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            System.Object[] @instances = (System.Object[])typeof(System.Object[]).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack));
 
 
             var result_of_this_method = CatLib.App.Release(ref @instances, @reverse);
 
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            __intp.Free(ptr_of_this_method);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             switch(ptr_of_this_method->ObjectType)
             {
                 case ObjectTypes.StackObjectReference:
                     {
                         var ___dst = *(StackObject**)&ptr_of_this_method->Value;
-                        object ___obj = instances;
+                        object ___obj = @instances;
                         if (___dst->ObjectType >= ObjectTypes.Object)
                         {
                             if (___obj is CrossBindingAdaptorType)
@@ -1702,12 +1716,12 @@ namespace ILRuntime.Runtime.Generated
                         var ___obj = __mStack[ptr_of_this_method->Value];
                         if(___obj is ILTypeInstance)
                         {
-                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = instances;
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @instances;
                         }
                         else
                         {
                             var ___type = __domain.GetType(___obj.GetType()) as CLRType;
-                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, instances);
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @instances);
                         }
                     }
                     break;
@@ -1716,22 +1730,23 @@ namespace ILRuntime.Runtime.Generated
                         var ___type = __domain.GetType(ptr_of_this_method->Value);
                         if(___type is ILType)
                         {
-                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = instances;
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @instances;
                         }
                         else
                         {
-                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, instances);
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @instances);
                         }
                     }
                     break;
                  case ObjectTypes.ArrayReference:
                     {
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Object[][];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = instances;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @instances;
                     }
                     break;
             }
 
+            __intp.Free(ptr_of_this_method);
             __ret->ObjectType = ObjectTypes.Integer;
             __ret->Value = result_of_this_method ? 1 : 0;
             return __ret + 1;
