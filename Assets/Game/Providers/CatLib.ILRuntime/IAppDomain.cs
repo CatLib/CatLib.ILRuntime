@@ -9,7 +9,7 @@
  * Document: https://catlib.io/
  */
 
-namespace CatLib.API.ILRuntime
+namespace CatLib.ILRuntime
 {
     /// <summary>
     /// App Domain

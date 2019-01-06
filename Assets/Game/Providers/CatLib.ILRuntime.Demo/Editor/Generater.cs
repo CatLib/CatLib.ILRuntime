@@ -35,12 +35,12 @@ namespace CatLib.ILRuntime
                 typeof(string),
                 typeof(Array),
                 typeof(Dictionary<string, int>),
-                typeof(App),
+                typeof(IContainer),
                 typeof(Dictionary<global::ILRuntime.Runtime.Intepreter.ILTypeInstance, int>)
             };
 
             // todo: 程序生成路径需要可配置
-            BindingCodeGenerator.GenerateBindingCode(types, "Assets/Game/Providers/CatLib.ILRuntime/Generated/CLR");
+            BindingCodeGenerator.GenerateBindingCode(types, "Assets/Game/Providers/CatLib.ILRuntime.Demo/Generated");
         }
     }
 }

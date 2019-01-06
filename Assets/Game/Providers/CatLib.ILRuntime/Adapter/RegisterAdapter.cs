@@ -26,8 +26,6 @@ namespace CatLib.ILRuntime.Adapter
         {
             appDomain.RegisterCrossBindingAdaptor(new AdapterServiceProvider());
             appDomain.RegisterCrossBindingAdaptor(new AdapterIServiceProvider());
-            appDomain.RegisterCrossBindingAdaptor(new AdapterICoroutineInit());
-            // appDomain.RegisterCrossBindingAdaptor(new AdapterIServiceProvider_ICoroutineInit());
         }
     }
 }

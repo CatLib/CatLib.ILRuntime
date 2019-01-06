@@ -12,7 +12,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CatLib.API.ILRuntime;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Intepreter;
 using UnityEngine;
@@ -56,6 +55,7 @@ namespace CatLib.ILRuntime
             : base(behaviour)
         {
             deferInit = false;
+            App.Alias<ILRuntimeApplication, IApplication>();
             App.Extend<ILTypeInstance>(instance => instance.CLRInstance);
         }
 

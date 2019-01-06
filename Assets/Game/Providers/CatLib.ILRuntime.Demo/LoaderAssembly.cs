@@ -14,7 +14,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine.Networking;
 
-namespace CatLib.ILRuntime
+namespace CatLib.ILRuntime.Demo
 {
     /// <summary>
     /// Assembly加载器

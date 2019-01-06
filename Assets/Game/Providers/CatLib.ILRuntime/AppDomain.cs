@@ -11,7 +11,6 @@
 
 using System;
 using System.IO;
-using CatLib.API.ILRuntime;
 using CatLib.ILRuntime.Adapter;
 using CatLib.ILRuntime.Redirect;
 using ILRuntime.Runtime.Intepreter;
@@ -35,19 +34,57 @@ namespace CatLib.ILRuntime
         protected DebugLevels DebugLevel { get; private set; }
 
         /// <summary>
+        /// 应用程序
+        /// </summary>
+        protected IApplication Application { get; private set; }
+
+        /// <summary>
+        /// 是否已经完成了初始化
+        /// </summary>
+        private bool inited;
+
+        /// <summary>
         /// 构造一个ILRuntime Appdomain
         /// </summary>
+        /// <param name="application">应用程序</param>
         /// <param name="debugLevel">调试等级</param>
-        public AppDomain(DebugLevels debugLevel)
+        public AppDomain(IApplication application, DebugLevels debugLevel)
         {
             Domain = new ILRuntimeDomain();
             DebugLevel = debugLevel;
+            Application = application;
+            inited = false;
 
             RegisterDefaultDelegate();
             RegisterRedirect.Register(Domain);
             RegisterAdapter.Register(Domain);
+        }
 
-            // TODO：注册clr绑定
+        /// <summary>
+        /// 热更新代码初始化
+        /// </summary>
+        /// <param name="main">入口函数</param>
+        public void Init(string main)
+        {
+            if(inited)
+            {
+                throw new CodeStandardException("Repeated Init() is not allowed.");
+            }
+
+            var method = Str.Method(main);
+            var type = main.Substring(0, main.Length - method.Length).TrimEnd('.');
+
+            inited = true;
+
+            var application = Application as ILRuntimeApplication;
+            if (application != null)
+            {
+                application.DeferInitServiceProvider(
+                    () => Invoke(type, method, null, Application));
+                return;
+            }
+
+            Invoke(type, method, null, Application);
         }
 
         /// <summary>
@@ -55,7 +92,7 @@ namespace CatLib.ILRuntime
         /// </summary>
         /// <param name="dll">动态链接库</param>
         /// <param name="symbol">调试符</param>
-        public void LoadAssembly(Stream dll, Stream symbol = null)
+        public virtual void LoadAssembly(Stream dll, Stream symbol = null)
         {
             if (DebugLevel == DebugLevels.Production)
             {
@@ -72,8 +109,9 @@ namespace CatLib.ILRuntime
         /// <param name="instance">类型实例</param>
         /// <param name="params">传递参数</param>
         /// <returns></returns>
-        public object Invoke(string type, string method, object instance, params object[] @params)
+        public virtual object Invoke(string type, string method, object instance, params object[] @params)
         {
+            AssertInited();
             return Domain.Invoke(type, method, instance, @params);
         }
 
@@ -83,8 +121,9 @@ namespace CatLib.ILRuntime
         /// <param name="type">类型全名</param>
         /// <param name="args">构造函数参数</param>
         /// <returns></returns>
-        public object CreateInstance(string type, object[] args = null)
+        public virtual object CreateInstance(string type, object[] args = null)
         {
+            AssertInited();
             return Domain.Instantiate(type, args);
         }
 
@@ -167,6 +206,26 @@ namespace CatLib.ILRuntime
         public void RegisterDelegateConvertor<T>(Func<Delegate, Delegate> action)
         {
             Domain.DelegateManager.RegisterDelegateConvertor<T>(action);
+        }
+
+        /// <summary>
+        /// 将CatLib AppDomain转为ILRuntime的AppDomain
+        /// </summary>
+        /// <param name="domain">CatLib AppDomain</param>
+        public static implicit operator ILRuntimeDomain(AppDomain domain)
+        {
+            return domain.Domain;
+        }
+
+        /// <summary>
+        /// 断言已经被初始化
+        /// </summary>
+        protected virtual void AssertInited()
+        {
+            if(!inited)
+            {
+                throw new CodeStandardException("Please Init() first.");
+            }
         }
 
         /// <summary>
