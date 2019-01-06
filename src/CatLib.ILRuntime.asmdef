@@ -1,0 +1,14 @@
+{
+    "name": "CatLib.ILRuntime",
+    "references": [
+        "CatLib.Unity"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
