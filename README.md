@@ -1,5 +1,11 @@
 <p align="center"><img width="173" height="57" src="https://catlib.io/imgs/logo-txt.png"></p>
 
+<p align="center">
+<a href="https://github.com/Catlib/CatLib.ILRuntime/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a>
+  <a href="https://github.com/CatLib/CatLib.ILRuntime/releases"><img src="https://img.shields.io/github/release/CatLib/CatLib.ILRuntime.svg" /></a>
+  <a href="https://github.com/CatLib/Core/releases"><img src="https://img.shields.io/badge/CatLib.Core-v1.3.0-green.svg" /></a>
+</p>
+
 # 关于 CatLib For ILRuntime
 
 `CatLib For ILRuntime`是基于CatLib和ILRuntime的热更新扩展包。
