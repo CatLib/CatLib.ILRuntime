@@ -71,6 +71,15 @@ namespace CatLib.ILRuntime
                 throw new CodeStandardException("Repeated Init() is not allowed.");
             }
 
+            CallMain(main);
+        }
+
+        /// <summary>
+        /// 调用初始化函数
+        /// </summary>
+        /// <param name="main">入口函数</param>
+        protected virtual void CallMain(string main)
+        {
             var method = Str.Method(main);
             var type = main.Substring(0, main.Length - method.Length).TrimEnd('.');
 
