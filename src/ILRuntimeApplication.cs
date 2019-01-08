@@ -74,6 +74,34 @@ namespace CatLib.ILRuntime
 
             return base.CreateInstance(makeServiceType, userParams);
         }
+        
+        /// <summary>
+        /// 获取字段需求服务
+        /// </summary>
+        /// <param name="property">字段</param>
+        /// <returns>需求的服务名</returns>
+        protected override string GetPropertyNeedsService(PropertyInfo property)
+        {
+            if (property is ILRuntimePropertyInfo)
+            {
+                return property.PropertyType.FullName;
+            }
+            return Type2Service(property.PropertyType);
+        }
+
+        /// <summary>
+        /// 获取参数需求服务
+        /// </summary>
+        /// <param name="baseParam">当前正在解决的变量</param>
+        /// <returns>需求的服务名</returns>
+        protected override string GetParamNeedsService(ParameterInfo baseParam)
+        {
+            if (baseParam is ILRuntimeParameterInfo)
+            {
+                return baseParam.ParameterType.FullName;
+            }
+            return Type2Service(baseParam.ParameterType);
+        }
 
         /// <summary>
         /// 注册服务提供者
