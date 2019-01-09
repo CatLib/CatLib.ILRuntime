@@ -356,9 +356,9 @@ namespace CatLib.ILRuntime.Redirect
                 throw new EntryPointNotFoundException();
             }
 
-            var tType = Helper.ITypeToClrType(genericArguments[0]);
+            var tService = Helper.ITypeToService(genericArguments[0]);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Type2Service(tType));
+            return ILIntepreter.PushObject(esp, mStack, tService);
         }
     }
 }
