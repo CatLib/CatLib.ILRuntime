@@ -173,7 +173,7 @@ namespace CatLib.ILRuntime.Redirect
             return ILIntepreter.PushObject(esp, mStack, App.IsStatic(tService));
         }
 
-        // public static bool Alias<TService>()
+        // public static bool IsAlias<TService>()
         private static StackObject* IsAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
