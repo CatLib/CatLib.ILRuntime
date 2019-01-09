@@ -35,8 +35,7 @@ namespace CatLib.ILRuntime.Redirect
         static RedirectExtendBindData()
         {
             mapping = new RedirectMapping();
-            // mapping.Register("Alias", 1, 1, Alias_TAlias);
-            // TODO: 找幻想验证这个功能
+            mapping.Register("Alias", 1, 1, Alias_TAlias);
         }
 
         /// <summary>
