@@ -48,6 +48,7 @@ namespace CatLib.ILRuntime.Redirect
             }, OnResolving_T_IBindData_Action2);
             mapping.Register("OnAfterResolving", 1, 2, new string[]
             {
+                "CatLib.IBindData",
                 "System.Action`1[T]"
             }, OnAfterResolving_T_IBindData_Action1);
             mapping.Register("OnAfterResolving", 1, 2, new string[]
@@ -57,6 +58,7 @@ namespace CatLib.ILRuntime.Redirect
             }, OnAfterResolving_T_IBindData_Action2);
             mapping.Register("OnRelease", 1, 2, new string[]
             {
+                "CatLib.IBindData",
                 "System.Action`1[T]"
             }, OnRelease_T_IBindData_Action1);
             mapping.Register("OnRelease", 1, 2, new string[]
