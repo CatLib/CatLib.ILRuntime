@@ -6,11 +6,11 @@
   <a href="https://github.com/CatLib/Core/releases"><img src="https://img.shields.io/badge/CatLib.Core-v1.3.0-green.svg" /></a>
 </p>
 
-# 关于 CatLib For ILRuntime
+## 关于 CatLib For ILRuntime
 
 `CatLib For ILRuntime`是基于CatLib和ILRuntime的热更新扩展包。
 
-使用该扩展包，您可以轻松的让Unity项目支持热更新，并且可以像主工程那样使用CatLib框架。
+使用该扩展包，您可以轻松的让Unity项目支持热更新，并且可以像主工程那样使用[CatLib框架](https://github.com/CatLib/CatLib)。
 
 ## 特性
 
