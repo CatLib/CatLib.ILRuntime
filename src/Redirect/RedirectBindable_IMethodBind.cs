@@ -71,7 +71,6 @@ namespace CatLib.ILRuntime.Redirect
             }
 
             var tService = Helper.ITypeToService(genericArguments[0]);
-            var ret = ILIntepreter.Minus(esp, 1);
 
             var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
             var instanceOfThisMethod =
@@ -79,7 +78,7 @@ namespace CatLib.ILRuntime.Redirect
                     intp.AppDomain, mStack));
             intp.Free(ptrOfThisMethod);
 
-            return ILIntepreter.PushObject(ret, mStack, instanceOfThisMethod.Needs(tService));
+            return ILIntepreter.PushObject(esp, mStack, instanceOfThisMethod.Needs(tService));
         }
     }
 }

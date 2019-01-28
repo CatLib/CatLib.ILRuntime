@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the CatLib package.
  *
  * (c) CatLib <support@catlib.io>
@@ -35,8 +35,37 @@ namespace CatLib.ILRuntime.Redirect
         static RedirectExtendBindData()
         {
             mapping = new RedirectMapping();
-            // mapping.Register("Alias", 1, 1, Alias_TAlias);
-            // TODO: 找幻想验证这个功能
+            mapping.Register("Alias", 1, 1, Alias_TAlias_IBindData);
+            mapping.Register("OnResolving", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`1[T]"
+            }, OnResolving_T_IBindData_Action1);
+            mapping.Register("OnResolving", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`2[CatLib.IBindData,T]"
+            }, OnResolving_T_IBindData_Action2);
+            mapping.Register("OnAfterResolving", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`1[T]"
+            }, OnAfterResolving_T_IBindData_Action1);
+            mapping.Register("OnAfterResolving", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`2[CatLib.IBindData,T]"
+            }, OnAfterResolving_T_IBindData_Action2);
+            mapping.Register("OnRelease", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`1[T]"
+            }, OnRelease_T_IBindData_Action1);
+            mapping.Register("OnRelease", 1, 2, new string[]
+            {
+                "CatLib.IBindData",
+                "System.Action`2[CatLib.IBindData,T]"
+            }, OnRelease_T_IBindData_Action2);
         }
 
         /// <summary>
@@ -60,7 +89,7 @@ namespace CatLib.ILRuntime.Redirect
         }
 
         // public static IBindData Alias<TAlias>(this IBindData bindData)
-        public static StackObject* Alias_TAlias(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+        public static StackObject* Alias_TAlias_IBindData(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
             var genericArguments = method.GenericArguments;
@@ -76,12 +105,264 @@ namespace CatLib.ILRuntime.Redirect
             ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
 
             var bindData =
-                (IBindData) typeof(IBindData).CheckCLRTypes(
+                (IBindData)typeof(IBindData).CheckCLRTypes(
                     StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
 
             intp.Free(ptrOfThisMethod);
 
             return ILIntepreter.PushObject(ret, mStack, bindData.Alias(tAlias));
+        }
+
+        // public static IBindData OnResolving<T>(this IBindData bindData, Action<T> closure)
+        public static StackObject* OnResolving_T_IBindData_Action1(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnResolving((_, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
+        }
+
+        // public static IBindData OnResolving<T>(this IBindData bindData, Action<IBindData, T> closure)
+        public static StackObject* OnResolving_T_IBindData_Action2(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnResolving((bind, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(bind, instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
+        }
+
+        // public static IBindData OnAfterResolving<T>(this IBindData bindData, Action<T> closure)
+        public static StackObject* OnAfterResolving_T_IBindData_Action1(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnAfterResolving((_, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
+        }
+
+        // public static IBindData OnAfterResolving<T>(this IBindData bindData, Action<IBindData, T> closure)
+        public static StackObject* OnAfterResolving_T_IBindData_Action2(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnAfterResolving((bind, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(bind, instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
+        }
+
+        // public static IBindData OnRelease<T>(this IBindData bindData, Action<T> closure)
+        public static StackObject* OnRelease_T_IBindData_Action1(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnRelease((_, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
+        }
+
+        // public static IBindData OnRelease<T>(this IBindData bindData, Action<IBindData, T> closure)
+        public static StackObject* OnRelease_T_IBindData_Action2(ILIntepreter intp, StackObject* esp, IList<object> mStack,
+            CLRMethod method, bool isNewObj)
+        {
+            var genericArguments = method.GenericArguments;
+            if (genericArguments == null || genericArguments.Length != 1 || method.ParameterCount != 2)
+            {
+                throw new EntryPointNotFoundException();
+            }
+
+            var tWhere = Helper.ITypeToClrType(genericArguments[0]);
+            var ret = ILIntepreter.Minus(esp, 2);
+
+            var ptrOfThisMethod = ILIntepreter.Minus(esp, 1);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var closure =
+                (Delegate)typeof(Delegate).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            ptrOfThisMethod = ILIntepreter.Minus(esp, 2);
+            ptrOfThisMethod = ILIntepreter.GetObjectAndResolveReference(ptrOfThisMethod);
+
+            var bindData =
+                (IBindData)typeof(IBindData).CheckCLRTypes(
+                    StackObject.ToObject(ptrOfThisMethod, intp.AppDomain, mStack));
+
+            intp.Free(ptrOfThisMethod);
+
+            bindData.OnRelease((bind, instance) =>
+            {
+                if (tWhere.IsInstanceOfType(instance))
+                {
+                    closure.DynamicInvoke(bind, instance);
+                }
+            });
+
+            return ILIntepreter.PushObject(ret, mStack, bindData);
         }
     }
 }

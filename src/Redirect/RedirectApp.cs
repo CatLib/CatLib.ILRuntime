@@ -173,7 +173,7 @@ namespace CatLib.ILRuntime.Redirect
             return ILIntepreter.PushObject(esp, mStack, App.IsStatic(tService));
         }
 
-        // public static bool Alias<TService>()
+        // public static bool IsAlias<TService>()
         private static StackObject* IsAlias_TService(ILIntepreter intp, StackObject* esp, IList<object> mStack,
             CLRMethod method, bool isNewObj)
         {
@@ -217,7 +217,7 @@ namespace CatLib.ILRuntime.Redirect
             var tService = Helper.ITypeToService(genericArguments[0]);
             App.Unbind(tService);
 
-            return ILIntepreter.Minus(esp, 1);
+            return esp;
         }
 
         // public static void Tag<TService>(string tag)
@@ -308,7 +308,7 @@ namespace CatLib.ILRuntime.Redirect
 
             intp.Free(ptrOfThisMethod);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Make(tService, userParams));
+            return ILIntepreter.PushObject(ILIntepreter.Minus(esp, 1), mStack, App.Make(tService, userParams));
         }
 
         // public static Func<TService> Factory<TService>(params object[] userParams)
@@ -343,7 +343,7 @@ namespace CatLib.ILRuntime.Redirect
                 throw new NotSupportedException("Only use the factory to hotfix services.");
             }
 
-            return ILIntepreter.PushObject(esp, mStack, result);
+            return ILIntepreter.PushObject(ILIntepreter.Minus(esp, 1), mStack, result);
         }
 
         // public static bool Type2Service<TService>()
@@ -356,9 +356,9 @@ namespace CatLib.ILRuntime.Redirect
                 throw new EntryPointNotFoundException();
             }
 
-            var tType = Helper.ITypeToClrType(genericArguments[0]);
+            var tService = Helper.ITypeToService(genericArguments[0]);
 
-            return ILIntepreter.PushObject(esp, mStack, App.Type2Service(tType));
+            return ILIntepreter.PushObject(esp, mStack, tService);
         }
     }
 }
