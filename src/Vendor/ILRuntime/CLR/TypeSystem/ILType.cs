@@ -286,7 +286,7 @@ namespace ILRuntime.CLR.TypeSystem
                         definition = null;
                     }
                     else
-                        RetriveDefinitino(def.GetElementType());
+                        RetriveDefinitino(((TypeSpecification)def).ElementType);
                 }
                 else
                     definition = def as TypeDefinition;
@@ -490,7 +490,7 @@ namespace ILRuntime.CLR.TypeSystem
                 interfaces = new IType[definition.Interfaces.Count];
                 for (int i = 0; i < interfaces.Length; i++)
                 {
-                    interfaces[i] = appdomain.GetType(definition.Interfaces[i], this, null);
+                    interfaces[i] = appdomain.GetType(definition.Interfaces[i].InterfaceType, this, null);
                     //only one clrInterface is valid
                     if (interfaces[i] is CLRType && firstCLRInterface == null)
                     {
@@ -517,7 +517,7 @@ namespace ILRuntime.CLR.TypeSystem
                 if (definition.BaseType.IsGenericInstance)
                 {
                     GenericInstanceType git = definition.BaseType as GenericInstanceType;
-                    var elementType = appdomain.GetType(definition.BaseType.GetElementType(), this, null);
+                    var elementType = appdomain.GetType(git.ElementType, this, null);
                     if (elementType is CLRType)
                     {
                         for (int i = 0; i < git.GenericArguments.Count; i++)
@@ -536,7 +536,7 @@ namespace ILRuntime.CLR.TypeSystem
                 if (specialProcess)
                 {
                     //如果泛型参数是自身，则必须要特殊处理，否则会StackOverflow
-                    var elementType = appdomain.GetType(definition.BaseType.GetElementType(), this, null);
+                    var elementType = appdomain.GetType(((GenericInstanceType)definition.BaseType).ElementType, this, null);
                     foreach (var i in appdomain.CrossBindingAdaptors)
                     {
                         if (i.Key.IsGenericType && !i.Key.IsGenericTypeDefinition)
