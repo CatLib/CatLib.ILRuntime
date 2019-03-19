@@ -20,7 +20,7 @@ namespace CatLib.ILRuntime.Redirect
     /// <summary>
     /// 重定向映射表
     /// </summary>
-    internal sealed unsafe class RedirectMapping : MonoBehaviour
+    internal sealed unsafe class RedirectMapping
     {
         /// <summary>
         /// 函数签名信息
