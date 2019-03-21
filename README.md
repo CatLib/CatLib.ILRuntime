@@ -20,7 +20,7 @@
 
 ## 文档
 
-您只需要进入 [中文文档](https://ilruntime.catlib.io) 就可以看到她们。
+您只需要进入 [中文文档](https://ilruntime.catlib.io) 就可以看到她们。您还可以通过 [示例项目](https://github.com/CatLib/demo-how-to-use-catlib-for-ilruntime) 来快速了解该扩展方案的使用。
 
 ## 授权
 
